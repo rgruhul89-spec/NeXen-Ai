@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+<title>Nexan Ai · By Ruhul</title>
+<meta name="author" content="Ruhul">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2305070D'/%3E%3Cpath d='M8 24V8l16 16V12' fill='none' stroke='%232F6BFF' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='24' cy='7' r='2.2' fill='%239CC0FF'/%3E%3C/svg%3E">
+<style>
+:root{--bg:#05070D;--side:#080C16;--panel:#0E1626;--line:#1A2744;--blue:#2F6BFF;--lb:#6FA3FF;--txt:#E8EEFB;--mut:#8A9BBE}
+*{box-sizing:border-box;margin:0;scrollbar-width:thin;scrollbar-color:#1A2744 transparent}
+html,body{height:100%}
+body{font-family:system-ui,-apple-system,'Segoe UI',Roboto,'Noto Sans Bengali','Hind Siliguri',sans-serif;background:var(--bg);color:var(--txt);display:flex;overflow:hidden;height:100vh;height:100dvh}
+button,textarea,input{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--lb);outline-offset:2px}
+aside{width:272px;background:#080C16;padding:14px;display:flex;flex-direction:column;gap:10px;border-right:1px solid var(--line);z-index:5;transition:transform .3s}
+.brand{display:flex;align-items:center;gap:10px;font-weight:600;font-size:19px;padding:4px 6px}
+.brand svg{width:30px;height:30px}
+.brand #sx{margin-left:auto;display:none;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--panel);border:1px solid var(--line);color:var(--txt);cursor:pointer}
+.brand #sx svg{width:20px;height:20px}
+.sb{display:flex;align-items:center;gap:12px;background:#0C1424;border:1px solid var(--line);border-radius:14px;padding:9px 12px;cursor:pointer;text-align:left;color:var(--txt);transition:background .2s,border-color .2s,box-shadow .2s,transform .2s}
+.sb:hover{border-color:var(--blue);box-shadow:0 6px 22px #2F6BFF33;transform:translateY(-1px)}
+.sb:active{transform:scale(.98)}
+.sb .lb{display:flex;flex-direction:column;line-height:1.3}.sb .lb b{font-weight:600;font-size:14.5px}.sb .lb small{color:var(--mut);font-size:12.5px}
+.sb.pri{background:linear-gradient(135deg,#2F6BFF,#1B3FD1);border:0;box-shadow:0 8px 24px #2F6BFF40}
+.sb.pri .lb small{color:#CFE0FF}.sb.pri .ic{background:#ffffff26}
+.sec{font-size:12.5px;color:var(--mut);padding:6px 8px 0}
+.ic{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;background:linear-gradient(135deg,#1B3FD1,#2F6BFF);color:#fff;flex:none}
+.sb:not(.pri) .ic{background:#12203F;color:var(--lb)}
+#list{flex:1;overflow:auto;display:flex;flex-direction:column;gap:2px}
+.it{display:flex;align-items:center;gap:6px;padding:9px 10px;border-radius:10px;cursor:pointer;color:var(--mut);font-size:14.5px;transition:background .2s,transform .2s}
+.it:hover,.it.on{background:var(--panel);color:var(--txt)}.it.on{box-shadow:inset 3px 0 0 var(--blue)}.it:hover{transform:translateX(3px)}
+.it span{flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.it button{background:none;border:0;cursor:pointer;color:var(--mut);opacity:0;padding:2px 6px}
+.it:hover button{opacity:1}
+.empty{color:var(--mut);font-size:13.5px;padding:8px;line-height:1.5}
+main{flex:1;display:flex;flex-direction:column;min-width:0;position:relative;overflow:hidden}
+main::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(620px 420px at 18% 8%,#2F6BFF30,transparent 60%),radial-gradient(520px 420px at 88% 92%,#1B3FD140,transparent 60%)}
+.bar,#msgs,.foot{position:relative;z-index:1}
+.bar{display:none;padding:10px 14px;align-items:center;gap:10px}
+.bar .rb{flex:none;width:44px;height:44px;border-radius:50%;background:var(--panel);border:1px solid var(--line);display:grid;place-items:center;cursor:pointer;color:var(--txt);transition:transform .2s,border-color .2s}
+.bar .rb:hover{border-color:var(--blue)}.bar .rb:active{transform:scale(.92)}
+.bar b{flex:1;text-align:center;font-weight:600;font-size:16px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+#msgs{flex:1;overflow:auto;padding:24px 16px}
+#wel{position:absolute;z-index:1;inset:0 0 130px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;padding:16px;pointer-events:none}
+.big{width:84px;height:84px;margin-bottom:6px}
+.dr{stroke-dasharray:1;animation:draw 1.4s cubic-bezier(.6,0,.2,1) both}
+.sp{animation:pop .5s 1.2s both}
+@keyframes draw{from{stroke-dashoffset:1}}
+@keyframes pop{from{opacity:0;transform:scale(0)}}
+@keyframes glow{50%{filter:drop-shadow(0 0 14px #2F6BFF99)}}
+#wel h1{font-size:28px;font-weight:600;line-height:1.35;color:var(--txt);animation:up .5s both}
+#wel h1 small{display:block;font-size:.82em;font-weight:500}
+#wel p{color:var(--mut);animation:up .8s .5s both;line-height:1.6}
+@keyframes up{from{opacity:0;transform:translateY(16px)}}
+@keyframes sh{to{background-position:-200% 0}}
+.m{max-width:768px;margin:0 auto 22px;display:flex;gap:14px;animation:fade .18s both}
+@keyframes fade{from{opacity:0}}
+@keyframes blink{50%{opacity:.45}}
+@keyframes pop2{from{opacity:0;transform:translateY(16px) scale(.97)}}
+.m.u{justify-content:flex-end}
+.av{flex:none;width:30px;height:30px;border-radius:50%;background:var(--panel);border:1px solid var(--line);display:grid;place-items:center}
+.av svg{width:18px;height:18px}
+.u .av{display:none}
+.col{min-width:0}.u .col{display:flex;flex-direction:column;align-items:flex-end}
+.b{line-height:1.75;white-space:pre-wrap;overflow-wrap:anywhere}
+.u .b{background:#12203F;border-radius:20px;padding:10px 16px;max-width:560px}
+.b.err{color:#FF8A9A}
+.b code{background:#0E1626;border:1px solid var(--line);border-radius:6px;padding:1px 6px;font-size:.92em}
+.b pre{background:#0A1020;border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:8px 0;overflow-x:auto}
+.b pre code{background:none;border:0;padding:0}
+.imgs{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;margin-bottom:6px}
+.imgs img{max-width:220px;max-height:180px;border-radius:14px;border:1px solid var(--line);display:block}
+.cp{background:none;border:0;color:var(--mut);cursor:pointer;font-size:13px;margin-top:6px;padding:2px 0}
+.acts{display:flex;gap:2px;margin-top:6px;margin-left:-8px}
+.acts button{width:36px;height:36px;border-radius:50%;background:none;border:0;color:var(--mut);cursor:pointer;display:grid;place-items:center;transition:background .2s,color .2s,transform .15s}
+.acts button:hover{background:#12203F;color:var(--lb)}.acts button:active{transform:scale(.88)}.acts button.ok{color:#5EE6A0}
+.cp:hover{color:var(--lb)}
+.dots{display:inline-flex;align-items:center;gap:3px;height:22px;vertical-align:middle}
+.dots span{width:4px;height:100%;border-radius:4px;background:linear-gradient(#9CC0FF,#2F6BFF);animation:wave 1.1s ease-in-out infinite}
+.dots span:nth-child(2){animation-delay:.12s}.dots span:nth-child(3){animation-delay:.24s}.dots span:nth-child(4){animation-delay:.36s}.dots span:nth-child(5){animation-delay:.48s}
+@keyframes wave{0%,100%{transform:scaleY(.25);opacity:.5}50%{transform:scaleY(1);opacity:1}}
+.av{position:relative}
+.av.think{animation:blink 1.2s ease-in-out infinite}
+.dots::after{content:"Thinking… · ভাবছে…";margin-left:8px;color:var(--mut)}
+.foot{max-width:768px;width:100%;margin:0 auto;padding:8px 16px 18px}
+#strip{display:flex;gap:12px;flex-wrap:wrap;padding:10px 10px 10px}
+#strip:empty{display:none}
+.th{position:relative;width:72px;height:72px;animation:pop2 .3s both}
+.th img{width:100%;height:100%;object-fit:cover;border-radius:14px;border:1px solid var(--line);display:block}
+.th button{position:absolute;top:-9px;right:-9px;width:26px;height:26px;border-radius:50%;border:2px solid var(--bg);background:#fff;color:#05070D;cursor:pointer;font-size:12px;font-weight:700;line-height:1;display:grid;place-items:center;box-shadow:0 2px 8px #000A;transition:transform .15s,background .15s,color .15s}
+.th button:hover{background:#FF5C73;color:#fff;transform:scale(1.12)}
+form{display:flex;align-items:flex-end;gap:6px;border-radius:28px;padding:8px 8px 8px 10px;border:1px solid var(--line);background:var(--panel);transition:border-color .2s}
+form:focus-within{border-color:var(--blue)}
+#in{flex:1;resize:none;max-height:160px;background:none;border:0;outline:0;padding:9px 4px;line-height:1.5}
+#in::placeholder{color:var(--mut)}
+#at{flex:none;width:38px;height:38px;border-radius:50%;background:none;border:0;cursor:pointer;display:grid;place-items:center;color:var(--mut);transition:transform .3s,color .2s,background .2s}
+#at:hover{color:var(--lb);background:#12203F;transform:rotate(-20deg) scale(1.1)}
+#go{flex:none;width:38px;height:38px;border-radius:50%;background:#1A2744;border:0;cursor:pointer;display:grid;place-items:center;opacity:.55;transform:scale(.88);transition:transform .25s cubic-bezier(.3,1.5,.5,1),opacity .25s,background .25s}
+.ready #go{background:var(--blue);opacity:1;transform:scale(1)}
+.ready #go:hover{transform:scale(1.12)}#go:active{transform:scale(.9)}
+#go:disabled{cursor:default}
+@keyframes ring{0%{box-shadow:0 0 0 0 #2F6BFF77}70%,100%{box-shadow:0 0 0 12px #2F6BFF00}}
+.gimg{display:block;width:min(100%,420px);aspect-ratio:1/1;object-fit:cover;border-radius:16px;border:1px solid var(--line);background:#0E1626;animation:up .5s both}
+.gsk{width:min(100%,420px);aspect-ratio:1/1;border-radius:16px;border:1px solid var(--line);display:grid;place-items:center;text-align:center;padding:16px;line-height:1.6;color:var(--mut);background:#0E1626;animation:blink 1.4s ease-in-out infinite}
+.dl{display:inline-block;text-decoration:none;margin-right:14px}
+#drop{position:fixed;inset:12px;border:2px dashed var(--blue);border-radius:24px;background:#05070DE6;display:none;place-items:center;font-size:20px;z-index:30;pointer-events:none;text-align:center;line-height:1.6}
+#drop.on{display:grid}
+dialog{margin:auto;padding:0;color:var(--txt);width:min(560px,94vw);max-height:92vh;overflow:auto;border:1px solid var(--line);border-radius:24px;background:linear-gradient(180deg,#0B1322,#070B14);box-shadow:0 30px 80px #000A}
+dialog[open]{animation:pop2 .35s cubic-bezier(.2,.9,.3,1.15) both}
+dialog::backdrop{background:#000B}
+.dh{display:flex;align-items:center;gap:14px;padding:20px 22px 6px}
+.dh h2{font-size:20px;line-height:1.2}.dh .sub{color:var(--mut);font-size:14px}
+.dh .ic{width:42px;height:42px;border-radius:14px;box-shadow:0 8px 20px #2F6BFF40}
+.x{margin-left:auto;background:none;border:0;color:var(--mut);cursor:pointer;width:34px;height:34px;border-radius:50%;transition:all .25s}
+.x:hover{background:#12203F;color:#fff;transform:rotate(90deg)}
+.hint{padding:6px 22px 14px;color:var(--mut);font-size:13.5px;line-height:1.65}
+.card{margin:0 18px;padding:16px;background:#0C1424;border:1px solid var(--line);border-radius:18px;display:flex;flex-direction:column;gap:8px}
+.card label{font-size:13.5px;font-weight:500;display:flex;gap:6px;align-items:baseline}.card label small{color:var(--mut);font-weight:400}
+.chipbox{display:flex;flex-wrap:wrap;gap:6px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:8px 10px;cursor:text;transition:border-color .2s,box-shadow .2s}
+.chipbox:focus-within,.fld:focus{border-color:var(--blue);box-shadow:0 0 0 3px #2F6BFF26}
+#chips{display:contents}
+.chipbox input{flex:1;min-width:150px;background:none;border:0;outline:0;padding:3px 2px}
+.chip{display:inline-flex;align-items:center;gap:4px;background:#12275A;color:#BFD3FF;border-radius:20px;padding:3px 6px 3px 11px;font-size:13px;animation:pop2 .25s both}
+.chip.s{padding:3px 11px}
+.chip button{background:none;border:0;color:#8FA8E0;cursor:pointer;font-size:11px;padding:0 3px}
+.eg{color:var(--mut);font-size:12.5px;margin:-2px 0 4px}
+.fld{width:100%;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 12px;outline:0;resize:vertical;line-height:1.6;transition:border-color .2s,box-shadow .2s}
+.btn{border:0;border-radius:12px;padding:11px;cursor:pointer;font-weight:500;background:linear-gradient(135deg,#2F6BFF,#1B3FD1);box-shadow:0 8px 24px #2F6BFF40;transition:transform .15s}
+.btn:hover{transform:translateY(-1px) scale(1.01)}.btn:active{transform:scale(.97)}
+.pw{display:flex;gap:8px}.pw .fld{flex:1;resize:none;min-width:0}.pw .btn{padding:0 16px;white-space:nowrap}
+#tform{display:none;flex-direction:column;gap:8px}
+#tmsg{min-height:1em;margin:0;line-height:1.5}
+.pub{background:#12275A;color:#BFD3FF;border:0;border-radius:8px;padding:2px 9px;font-size:12px;cursor:pointer;margin-top:6px}.pub:hover{background:#1B3FD1;color:#fff}
+.dev{font-size:11.5px;color:#E0B35A;background:#2A2010;border-radius:20px;padding:1px 8px;margin-left:6px}
+.pj{display:flex;align-items:center;gap:8px;background:#12275A66;border:1px solid #2A4170;border-radius:12px;padding:8px 10px;font-size:13.5px;animation:pop2 .3s both}
+.pj b{flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-weight:600}
+.pj button{background:#12203F;border:0;border-radius:8px;padding:3px 9px;font-size:12px;cursor:pointer;color:var(--lb);white-space:nowrap}.pj button:hover{background:#1B3FD1;color:#fff}
+.te>button.ed:hover{background:#12203F;color:var(--lb)}
+.shake{animation:shk .4s}@keyframes shk{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.lh{display:flex;align-items:center;gap:8px;padding:18px 22px 8px;font-size:13.5px;color:var(--mut)}
+.lh b{background:#12203F;color:var(--lb);border-radius:20px;padding:1px 9px;font-weight:500}
+#tl{padding:0 18px 20px;display:flex;flex-direction:column;gap:8px}
+.te{display:flex;gap:10px;align-items:flex-start;background:#0C1424;border:1px solid var(--line);border-radius:14px;padding:12px 14px;animation:pop2 .3s both;transition:border-color .2s}
+.te:hover{border-color:#2A4170}
+.tb2{flex:1;min-width:0}.tks{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:6px}.tt{font-size:14px;line-height:1.6;overflow-wrap:anywhere}
+.te>button{background:none;border:0;color:var(--mut);cursor:pointer;border-radius:8px;width:28px;height:28px;transition:all .2s}
+.te>button:hover{background:#2A1219;color:#FF8A9A}
+.empty2{text-align:center;color:var(--mut);padding:20px 0 6px;line-height:1.7;font-size:14px}.empty2 div{font-size:30px;margin-bottom:4px;animation:glow 4s ease-in-out infinite}
+.own{text-align:center;font-size:12.5px;color:var(--mut);line-height:1.6;padding:12px 8px 4px;border-top:1px solid var(--line)}
+.own b{font-weight:600;color:var(--lb)}
+.own span{display:block}
+.tag{margin-top:12px;padding:6px 16px;border:1px solid var(--line);border-radius:20px;font-size:13px;color:var(--lb);background:#0E162699;animation:up .8s .9s both}
+@media(min-width:761px){aside{animation:sl .7s cubic-bezier(.2,.8,.2,1) both}}
+@keyframes sl{from{opacity:0;transform:translateX(-28px)}}
+@media(max-width:760px){
+ aside{position:fixed;inset:0 auto 0 0;width:min(300px,86vw);transform:translateX(-100%);will-change:transform}
+ aside.open{transform:none}
+ #ov{position:fixed;inset:0;background:#000A;z-index:4;display:none}
+ aside.open+#ov{display:block}
+ .brand #sx{display:grid}
+ .bar{display:flex}#wel h1{font-size:22px}.imgs img{max-width:150px}
+}
+.i{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.i.s{width:16px;height:16px}
+#vc{flex:none;width:38px;height:38px;border-radius:50%;background:var(--blue);border:0;cursor:pointer;display:grid;place-items:center;color:#fff;transition:transform .15s}
+#vc:active{transform:scale(.9)}
+form.ready #vc{display:none}
+form:not(.ready) #go{display:none}
+body.nosr #vc{display:none}
+body.nosr form:not(.ready) #go{display:grid}
+.acts button.on{color:var(--lb)}
+#vo{position:fixed;inset:0;z-index:50;background:#05070D;display:none;flex-direction:column;align-items:center;justify-content:space-between;padding:calc(env(safe-area-inset-top,0px) + 16px) 20px calc(env(safe-area-inset-bottom,0px) + 28px)}
+#vo.on{display:flex}
+#vo .vt{width:100%;display:flex;justify-content:space-between;align-items:center}
+#vl{background:var(--panel);border:1px solid var(--line);color:var(--txt);border-radius:999px;padding:9px 18px;cursor:pointer;font-size:14px}
+#vm{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;width:100%;min-height:0}
+#vb{width:150px;height:150px;border-radius:50%;border:0;cursor:pointer;background:radial-gradient(circle at 35% 30%,#9CC0FF,#2F6BFF 55%,#1B3FD1);flex:none}
+#vo.l #vb{animation:orb 1.8s ease-in-out infinite}
+#vo.s #vb{animation:orb .9s ease-in-out infinite}
+#vo.t #vb{animation:blink 1s ease-in-out infinite}
+@keyframes orb{50%{transform:scale(1.12)}}
+#vs{font-size:18px;color:var(--txt);text-align:center}
+#vtx{max-width:560px;max-height:30vh;overflow:auto;text-align:center;color:var(--mut);line-height:1.6;font-size:16px;padding:0 8px;overflow-wrap:anywhere}
+#ve{width:64px;height:64px;border-radius:50%;background:var(--panel);border:1px solid var(--line);color:var(--txt);cursor:pointer;display:grid;place-items:center}
+#ve svg{width:26px;height:26px}
+@media(hover:none){.it button{opacity:.7}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+#tools{display:flex;gap:8px;overflow-x:auto;padding:2px 4px 10px;scrollbar-width:none}
+#tools::-webkit-scrollbar{display:none}
+.tl{flex:none;display:flex;align-items:center;gap:7px;background:#0C1424;border:1px solid var(--line);color:var(--mut);border-radius:999px;padding:7px 14px;font-size:13.5px;cursor:pointer;transition:transform .2s,background .2s,color .2s,border-color .2s,box-shadow .2s}
+.tl small{font-size:12px;opacity:.8}
+.tl:hover{color:var(--txt);border-color:var(--blue);transform:translateY(-1px)}
+.tl.on{background:var(--blue);border-color:var(--blue);color:#fff;box-shadow:0 4px 18px #2F6BFF55}
+#mic{flex:none;width:38px;height:38px;border-radius:50%;background:none;border:0;cursor:pointer;display:grid;place-items:center;color:var(--mut);transition:transform .3s,color .2s,background .2s}
+#mic:hover{color:var(--lb);background:#12203F;transform:scale(1.1)}
+#mic.on{color:#fff;background:#E5384F;animation:pulse 1.1s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 #E5384F88}100%{box-shadow:0 0 0 14px #E5384F00}}
+#sug{display:flex;flex-direction:column;gap:2px;max-width:420px;margin:22px auto 6px;width:100%;pointer-events:auto}
+#sug button{text-align:left;background:none;border:0;color:var(--txt);border-radius:14px;padding:12px 12px;cursor:pointer;display:flex;flex-direction:row;align-items:center;gap:12px;line-height:1.35;animation:up .6s both;transition:transform .2s,border-color .2s,box-shadow .2s}
+#sug button:nth-child(2){animation-delay:.08s}#sug button:nth-child(3){animation-delay:.16s}#sug button:nth-child(4){animation-delay:.24s}
+#sug button:hover{background:var(--panel);transform:translateX(3px)}
+#sug b{font-weight:500;font-size:16px}#sug small{margin-left:2px}#sug small{color:var(--mut);font-size:12.5px}
+.th.fc{width:auto;height:auto;max-width:210px;display:flex;align-items:center;background:#12203F;border:1px solid var(--line);border-radius:14px;padding:12px 16px;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fchip{background:#12203F;border:1px solid var(--line);border-radius:12px;padding:8px 12px;font-size:13.5px;max-width:240px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.toast{position:fixed;left:50%;bottom:130px;transform:translateX(-50%);background:#12203F;border:1px solid var(--line);color:var(--txt);padding:10px 16px;border-radius:14px;z-index:40;max-width:90vw;text-align:center;font-size:14px;animation:up .3s both}
+
+[hidden]{display:none!important}
+.au,.dash{position:fixed;inset:0;z-index:90;display:grid;place-items:center;padding:16px;background:radial-gradient(900px 500px at 50% -10%,#16307A66,transparent),var(--bg);overflow:auto;animation:fi .35s ease}
+@keyframes fi{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.aucard,.dc{background:linear-gradient(160deg,#101a30,var(--panel));border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:0 20px 60px #0009}
+.aucard{width:100%;max-width:400px}.aucard h2{font-size:24px;background:linear-gradient(90deg,#fff,var(--lb));-webkit-background-clip:text;background-clip:text;color:transparent}
+.aucard p{color:var(--mut);font-size:13px;margin:4px 0 16px}
+.tabs{display:flex;gap:6px;background:var(--bg);padding:4px;border-radius:12px;margin-bottom:14px}
+.tabs button{flex:1;padding:9px;border:0;border-radius:9px;background:none;color:var(--mut);cursor:pointer;font:inherit}
+.tabs .on{background:var(--blue);color:#fff}
+.au input,.dash input{width:100%;padding:12px 14px;margin-bottom:10px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--txt);font:inherit;font-size:16px}
+.au input:focus,.dash input:focus{outline:2px solid var(--blue);border-color:transparent}
+.dash input[readonly]{opacity:.6}
+.aer{color:#FF8A8A;font-size:13px;min-height:18px;margin-bottom:6px}.ok2{color:#6EE7A8}
+.abtn{width:100%;padding:12px;border:0;border-radius:12px;background:linear-gradient(90deg,var(--blue),#5B8CFF);color:#fff;font:inherit;font-weight:600;cursor:pointer;transition:transform .15s,opacity .2s}
+.abtn:active{transform:scale(.98)}.abtn:disabled{opacity:.55}.abtn.ghost{background:none;border:1px solid var(--line);color:var(--txt)}.abtn.red{background:#7A1F2B}
+.dash{place-items:start center;z-index:80}.dwrap{width:100%;max-width:880px}
+.dnav{display:flex;gap:6px;overflow-x:auto;padding-bottom:10px;margin-bottom:6px;position:sticky;top:0}
+.dnav button{white-space:nowrap;padding:9px 14px;border-radius:20px;border:1px solid var(--line);background:var(--panel);color:var(--mut);cursor:pointer;font:inherit;font-size:14px}
+.dnav .on{color:#fff;border-color:var(--blue);background:#14295E}.dnav #dx{margin-left:auto}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:12px 0}
+.dc{padding:16px;text-align:left;color:var(--txt);font:inherit;cursor:pointer;transition:transform .2s,border-color .2s}
+button.dc:hover{transform:translateY(-3px);border-color:var(--blue)}.dc b{display:block;font-size:26px}.dc span{color:var(--mut);font-size:13px}
+.dh2{font-size:22px;margin:6px 0 2px}.dwrap p{color:var(--mut);font-size:14px;line-height:1.6}
+.av2{width:34px;height:34px;border-radius:50%;background:var(--blue);display:grid;place-items:center;overflow:hidden;font-weight:700;flex:none}.av2 img{width:100%;height:100%;object-fit:cover}
+.av2.lg{width:92px;height:92px;font-size:34px}
+#acc{display:flex;align-items:center;gap:10px;width:100%;padding:8px;margin:6px 0;border:1px solid var(--line);border-radius:12px;background:var(--panel);color:var(--txt);cursor:pointer;font:inherit}
+.abtn.ld::after{content:'';display:inline-block;width:14px;height:14px;margin-left:8px;vertical-align:-2px;border:2px solid #fff6;border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite}@keyframes sp{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+.dash,.au{grid-template-columns:minmax(0,1fr)}.dwrap{min-width:0}.dc{min-width:0;overflow-wrap:anywhere}
+/* ===== v10 skin: Claymorphism (tactile buttons/cards) + selective Glassmorphism (nav, composer, dialogs, toasts) ===== */
+:root{--r1:14px;--r2:20px;--r3:28px;--gl:rgba(12,20,38,.78);--glb:rgba(130,170,255,.16);
+--clay:5px 6px 14px #02050ccc,-2px -2px 8px #2a4a9a26,inset 1px 1px 2px #ffffff14,inset -2px -3px 6px #0000004d;
+--clayp:3px 4px 10px #02050ccc,inset 2px 2px 4px #00000066,inset -1px -1px 3px #ffffff0d;
+--g:linear-gradient(150deg,#4C86FF,#2F6BFF 55%,#2254D6);--ease:cubic-bezier(.2,.7,.2,1)}
+@supports (backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px)){
+ aside,.bar,form#f,dialog,.aucard,.dnav,.toast{background:var(--gl);-webkit-backdrop-filter:blur(10px) saturate(1.2);backdrop-filter:blur(10px) saturate(1.2)}
+ aside{background:rgba(8,12,22,.86)}}
+@media(prefers-reduced-transparency:reduce),(update:slow){aside,.bar,form#f,dialog,.aucard,.dnav,.toast{-webkit-backdrop-filter:none;backdrop-filter:none;background:var(--panel)}}
+aside,.bar,dialog,.aucard,.dnav{border-color:var(--glb)}
+dialog{border:1px solid var(--glb);border-radius:var(--r3);box-shadow:0 24px 70px #000b,inset 1px 1px 0 #ffffff12;max-width:min(520px,calc(100vw - 24px))}
+dialog[open]{animation:pop .22s var(--ease)}dialog::backdrop{background:#02040acc}
+@keyframes pop{from{opacity:0;transform:translateY(10px) scale(.97)}to{opacity:1;transform:none}}
+.sb,.it,.tl,#sug button,.btn,.abtn,#go,#at,#mic,.bar .rb,.acts button,.dnav button{border-radius:var(--r1);transition:transform .16s var(--ease),box-shadow .2s,background .2s,border-color .2s}
+.sb.pri,#go,.btn,.abtn{background:var(--g);color:#fff;border:0;box-shadow:var(--clay)}
+.abtn.ghost{background:var(--panel);box-shadow:var(--clay);border:1px solid var(--line)}.abtn.red{background:linear-gradient(150deg,#A12B3B,#7A1F2B)}
+.sb.pri:active,#go:active,.btn:active,.abtn:active,#sug button:active,.dc:active{transform:scale(.97);box-shadow:var(--clayp)}
+#sug button,.dc,.card,.it.on,.tl{background:linear-gradient(160deg,#122040,var(--panel));border:1px solid var(--line);border-radius:var(--r2);box-shadow:var(--clay)}
+@media(hover:hover){#sug button:hover,button.dc:hover{transform:translateY(-2px)}}
+.it.on{border-radius:var(--r1)}
+form#f{border-radius:var(--r3);border:1px solid var(--glb);box-shadow:var(--clay);transition:border-color .2s,box-shadow .2s}
+form#f:focus-within{border-color:var(--blue);box-shadow:var(--clay),0 0 0 3px #2F6BFF33}
+#in{font-size:16px;line-height:1.5}
+.b{line-height:1.65;font-size:15.5px;overflow-wrap:anywhere}
+.m:not(.u) .b{background:linear-gradient(160deg,#0F1A30,#0B1322);border:1px solid var(--line);border-radius:6px var(--r2) var(--r2) var(--r2);padding:12px 15px;box-shadow:var(--clay)}
+.m.u .b{background:var(--g);color:#fff;border-radius:var(--r2) 6px var(--r2) var(--r2);padding:11px 15px;box-shadow:var(--clay)}
+.b pre{border-radius:var(--r1);overflow-x:auto;max-width:100%;-webkit-overflow-scrolling:touch;box-shadow:inset 2px 2px 8px #0009;border:1px solid var(--line)}
+.b.err{border-radius:var(--r2)}
+.m{animation:rise .28s var(--ease)}@keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+#msgs{overscroll-behavior:contain;scroll-behavior:auto}
+body{overflow-x:hidden}main,#msgs,.foot{min-width:0;max-width:100%}img,video,svg{max-width:100%}
+aside{padding-top:max(8px,env(safe-area-inset-top));padding-bottom:max(8px,env(safe-area-inset-bottom))}
+.bar{padding-top:max(6px,env(safe-area-inset-top))}.foot{padding-bottom:max(10px,env(safe-area-inset-bottom))}
+.toast{border:1px solid var(--glb);border-radius:var(--r2);bottom:calc(88px + env(safe-area-inset-bottom))}
+.sb,.it,.tl,#sug button,.bar .rb,#at,#mic,#go,.acts button,.dnav button,.abtn,.btn{min-height:44px;min-width:44px}.it{min-height:40px}
+:focus-visible{outline:2px solid var(--lb);outline-offset:2px}
+.dash{background:radial-gradient(800px 420px at 50% -8%,#1B3A9055,transparent),var(--bg)}
+.dnav{border:1px solid var(--glb);border-radius:var(--r2);padding:8px;top:max(0px,env(safe-area-inset-top));z-index:2}
+.dnav button{border-radius:20px;box-shadow:var(--clay)}.dnav .on{background:var(--g);border-color:transparent}
+.dc,.aucard{border-radius:var(--r3)}.dwrap{padding-bottom:env(safe-area-inset-bottom)}
+#dv>*{animation:rise .25s var(--ease)}
+.rl{display:grid;gap:8px;margin:6px 0 14px}.rl button{text-align:left;padding:12px 14px;border-radius:var(--r1);border:1px solid var(--line);background:var(--panel);color:var(--txt);font:inherit;font-size:14px;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:var(--clay)}
+.rl button:active{transform:scale(.98)}
+@media(max-width:760px){.dwrap{padding:0 2px}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.b{font-size:15px}}
+@media(min-width:1100px){.m,.foot>*,#msgs>*{max-width:820px}}
+
+.au{background:radial-gradient(620px 400px at 12% 0%,#2F6BFF38,transparent),radial-gradient(560px 380px at 92% 100%,#7C3AED33,transparent),#02030A}
+.aucard{max-width:420px;padding:28px 24px;text-align:center;box-shadow:0 30px 80px #000c,0 0 70px #2F6BFF1c,inset 1px 1px 0 #ffffff12}
+.alogo{display:grid;place-items:center;margin-bottom:10px;filter:drop-shadow(0 0 14px #5B7CFF66)}
+.abrand{font-size:26px;letter-spacing:.22em;font-weight:700;background:linear-gradient(90deg,#fff,#9DB8FF 55%,#B794FF);-webkit-background-clip:text;background-clip:text;color:transparent}
+.asub{margin:6px 0 18px!important;min-height:20px}
+.au form{text-align:left}.au label{display:block;font-size:13px;color:var(--mut);margin:0 0 6px 2px}
+.pwrow{position:relative}.pwrow input{padding-right:50px;margin-bottom:10px}
+.pwrow button{position:absolute;right:4px;top:2px;width:44px;height:44px;border:0;background:none;color:var(--mut);cursor:pointer;border-radius:12px;display:grid;place-items:center}.pwrow button:hover{color:var(--txt)}
+.arow{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin:2px 0 8px}
+.au label.chk{display:flex;align-items:center;gap:8px;margin:0;cursor:pointer;color:var(--txt);font-size:14px}.chk input{width:18px;height:18px;margin:0;padding:0;accent-color:var(--blue)}
+.lnk{background:none;border:0;color:var(--lb);cursor:pointer;font:inherit;font-size:14px;padding:10px 2px;min-height:44px}.lnk:hover{text-decoration:underline}
+.au .abtn:not(.ghost){background:linear-gradient(90deg,#2F6BFF,#7C5CFF)}
+.abtn small{margin-left:8px;font-size:11px;color:var(--mut);border:1px solid var(--line);border-radius:10px;padding:1px 7px}
+.abtn.ghost{display:flex;align-items:center;justify-content:center;gap:10px}
+.ordiv{display:flex;align-items:center;gap:12px;color:var(--mut);font-size:12px;margin:14px 0}.ordiv::before,.ordiv::after{content:'';flex:1;height:1px;background:var(--line)}
+[aria-invalid=true]{border-color:#FF6B6B!important}
+.aucard.sh{animation:shk .35s}@keyframes shk{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+@media(max-width:420px){.aucard{padding:22px 16px}}
+.au form#af{all:unset;display:block;box-sizing:border-box;width:100%;text-align:left}
+.abtn.ghost{font-size:14.5px;padding:12px 10px}.abtn.ghost small{white-space:nowrap}
+
+/* ===== NEXAN AI login/register (blue & black) ===== */
+.au{background:#080B12;overflow:auto;padding:12px}
+.nxw{position:relative;flex:none;margin:auto}
+.nxbox{position:absolute;left:0;top:0;width:750px;height:450px;transform-origin:0 0;background:#0D111B;border:2px solid #1677FF;box-shadow:0 0 25px rgba(22,119,255,.45),inset 0 0 20px rgba(22,119,255,.18);overflow:hidden;color:#fff;font-family:Poppins,system-ui,-apple-system,'Segoe UI',Roboto,'Noto Sans Bengali','Hind Siliguri',sans-serif}
+.nxbox *{box-sizing:border-box}
+.nxbox .curved{position:absolute;right:0;top:-5px;height:600px;width:850px;background:linear-gradient(45deg,#0D111B 8%,#124DCC 52%,#168BFF);transform:rotate(10deg) skewY(40deg);transform-origin:bottom right;transition:1.5s ease;transition-delay:1.6s}
+.nxbox.active .curved{transform:rotate(0) skewY(0);transition-delay:.5s}
+.nxbox .curved2{position:absolute;left:250px;top:100%;height:700px;width:850px;background:#0D111B;border-top:3px solid #258BFF;transform:rotate(0) skewY(0);transform-origin:bottom left;transition:1.5s ease;transition-delay:.5s;top:100%}
+.nxbox.active .curved2{transform:rotate(-11deg) skewY(-41deg);transition-delay:1.2s}
+.nxbox .fb{position:absolute;top:0;width:50%;height:100%;display:flex;flex-direction:column;justify-content:center}
+.nxbox .fb form{width:100%}
+.nxbox .fb.login,.nxbox .fb.recover{left:0;padding:0 40px}
+.nxbox .fb.register{right:0;padding:0 60px 0 40px}
+.nxbox form{all:unset;display:block;width:100%;text-align:left}
+.nxbox label.chk{display:flex;align-items:center;gap:6px;color:#AAB6CA;font-size:12px;margin:0}
+.nxbox h2{font-size:32px;text-align:center;font-weight:700;margin-bottom:2px}
+.nxbox .ib{position:relative;width:100%;height:46px;margin-top:20px}
+.nxbox .ib input{width:100%;height:100%;background:transparent;border:0;outline:0;border-bottom:2px solid #AAB6CA;padding:8px 30px 0 0;font:inherit;font-size:16px;font-weight:500;color:#fff;border-radius:0;transition:border-color .4s;margin:0}
+.nxbox .ib label{position:absolute;top:50%;left:0;transform:translateY(-50%);font-size:16px;color:#fff;pointer-events:none;transition:.4s;margin:0}
+.nxbox .ib input:focus~label,.nxbox .ib input:not(:placeholder-shown)~label{top:6px;font-size:12px;color:#AAB6CA}
+.nxbox .ib input:focus{border-bottom-color:#258BFF}
+.nxbox .ib input[aria-invalid=true]{border-bottom-color:#FF8A8A}
+.nxbox .nxic,.nxbox .nxeye{position:absolute;right:0;top:50%;transform:translateY(-50%);color:#AAB6CA;display:grid;place-items:center;width:26px;height:26px}
+.nxbox .ib input:focus~.nxic,.nxbox .ib input:focus~.nxeye{color:#258BFF}
+.nxbox .nxeye{background:none;border:0;cursor:pointer;padding:0}
+.nxbox .nxrow{display:flex;justify-content:space-between;align-items:center;gap:6px;margin-top:10px;font-size:12px}
+.nxbox .chk{display:flex;align-items:center;gap:6px;color:#AAB6CA;cursor:pointer;margin:0;font-size:12px}
+.nxbox .chk input{width:14px;height:14px;margin:0;accent-color:#1677FF}
+.nxbox .lnk{background:none;border:0;color:#258BFF;cursor:pointer;font:inherit;font-size:12px;padding:0}
+.nxbox .lnk:hover,.nxbox .nxsw a:hover{text-decoration:underline}
+.nxbox .nxer{color:#FF8A8A;font-size:12px;min-height:16px;margin-top:6px;text-align:center;line-height:1.3}
+.nxbox .nxhint{color:#AAB6CA;font-size:12px;text-align:center;margin-top:4px}
+.nxbox .nxbtn{position:relative;width:100%;height:45px;margin-top:6px;border-radius:40px;cursor:pointer;font:inherit;font-size:16px;font-weight:600;color:#fff;border:2px solid #1677FF;background:linear-gradient(#168BFF,#124DCC 60%,#0D3FAA);box-shadow:0 0 14px rgba(22,119,255,.45);overflow:hidden}
+.nxbox .nxbtn:before{content:"";position:absolute;left:0;right:0;top:-100%;height:300%;background:linear-gradient(#0D111B,#1677FF,#0D111B,#258BFF);z-index:-1;transition:.5s;display:none}
+.nxbox .nxbtn:active{transform:scale(.98)}.nxbox .nxbtn:disabled{opacity:.6}
+.nxbox .nxg{width:100%;height:40px;margin-top:9px;border-radius:40px;border:1px solid #2C3E66;background:#131A2A;color:#E8EEFB;font:inherit;font-size:14px;font-weight:500;display:flex;align-items:center;justify-content:center;gap:10px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.nxbox .nxg:hover,.nxbox .nxg:focus-visible{border-color:#258BFF;background:#17213A;box-shadow:0 0 0 3px rgba(37,139,255,.2);outline:0}.nxbox .nxg:disabled{opacity:.6;cursor:default}
+.nxbox .nxg .gi{flex:none}.nxbox .nxg.ld:after{content:"";width:14px;height:14px;border:2px solid #fff4;border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite}
+#auc{position:fixed;top:max(12px,env(safe-area-inset-top));right:12px;z-index:3;width:44px;height:44px;border-radius:50%;border:1px solid #2C3E66;background:#0D111Bcc;color:#E8EEFB;font-size:18px;cursor:pointer}
+#auc:hover,#auc:focus-visible{border-color:#258BFF}
+#gsi{display:flex;align-items:center;gap:10px;width:100%;padding:8px;margin:6px 0;border:1px solid var(--line);border-radius:12px;background:var(--panel);color:var(--txt);cursor:pointer;font:inherit;text-align:left}#gsi[hidden]{display:none}
+.nxbox .nxbtn.ld:after{content:"";display:inline-block;width:14px;height:14px;margin-left:8px;vertical-align:-2px;border:2px solid #fff6;border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite}
+.nxbox .nxsw{font-size:14px;text-align:center;margin-top:14px;line-height:1.5;color:#fff}.nxbox .nxsw p{margin:0}
+.nxbox .nxsw a{color:#258BFF;text-decoration:none;font-weight:600}
+.nxbox .info{position:absolute;top:0;width:50%;height:100%;display:flex;flex-direction:column;justify-content:center}
+.nxbox .info.login{right:0;text-align:right;padding:0 40px 60px 150px}
+.nxbox .info.register{left:0;text-align:left;padding:0 150px 60px 38px}
+.nxbox .info h2{text-align:inherit;font-size:30px;line-height:1.2;text-transform:uppercase;margin-bottom:8px}
+.nxbox .info p{font-size:14px;color:#fff;line-height:1.4}
+/* slide + blur animation (same as reference) */
+.nxbox .animation{transform:translateX(0);opacity:1;filter:none;transition:.7s ease;transition-delay:calc(.1s*var(--D))}
+.nxbox.active .fb.login .animation,.nxbox.rec .fb.login .animation{transform:translateX(-120%);opacity:0;filter:blur(10px);transition-delay:calc(.1s*var(--S))}
+.nxbox .fb.register .animation{transform:translateX(120%);opacity:0;filter:blur(10px);transition-delay:calc(.1s*var(--S))}
+.nxbox.active .fb.register .animation{transform:translateX(0);opacity:1;filter:none;transition-delay:calc(.1s*var(--D))}
+.nxbox .fb.recover .animation{transform:translateX(-120%);opacity:0;filter:blur(10px);transition-delay:calc(.1s*var(--S))}
+.nxbox.rec .fb.recover .animation{transform:translateX(0);opacity:1;filter:none;transition-delay:calc(.1s*var(--D))}
+.nxbox.active .info.login .animation{transform:translateX(120%);opacity:0;filter:blur(10px);transition-delay:calc(.1s*var(--S))}
+.nxbox .info.register .animation{transform:translateX(-120%);opacity:0;filter:blur(10px);transition-delay:calc(.1s*var(--S))}
+.nxbox.active .info.register .animation{transform:translateX(0);opacity:1;filter:none;transition-delay:calc(.1s*var(--D))}
+.nxbox.sh{animation:shk .35s}
+@media(prefers-reduced-motion:reduce){.nxbox *{transition-duration:.01s!important;transition-delay:0s!important}}
+
+.nxbox .info h2{font-size:26px}
+.nxbox .info p{font-size:12.5px}
+.nxbox .feat{list-style:none;padding:0;margin:10px 0 0;font-size:12px;line-height:1.75;color:#fff}
+.nxbox .feat li:before{content:"\2726\00a0";color:#9CC9FF}
+.nxbox .info.login{padding:0 36px 40px 100px}
+.nxbox .info.register{padding:0 100px 40px 38px}
+/* ===== Mobile layout: banner with diagonal on top, form below ===== */
+@media(max-width:640px){
+ .nxw{width:100%!important;height:auto!important;max-width:440px}
+ .nxbox{position:relative;width:100%;height:610px;transform:none!important}
+ .nxbox .curved{left:0;right:0;top:0;width:100%;height:215px;transform:none!important;transition:clip-path 1.2s ease .3s;clip-path:polygon(0 0,100% 0,100% 100%,0 80%)}
+ .nxbox.active .curved{clip-path:polygon(0 0,100% 0,100% 80%,0 100%)}
+ .nxbox .curved2{display:none}
+ .nxbox .info{top:0;left:0;right:auto;width:100%;height:215px;padding:20px 22px 0!important;text-align:left!important;justify-content:flex-start;overflow:hidden}
+ .nxbox .info h2{font-size:24px;margin-bottom:6px}
+ .nxbox .info p{font-size:13px}
+ .nxbox .feat{font-size:12.5px;line-height:1.6;margin-top:8px}
+ .nxbox .fb,.nxbox .fb.login,.nxbox .fb.register,.nxbox .fb.recover{left:0;right:auto;top:215px;width:100%;height:calc(100% - 215px);padding:0 26px;justify-content:flex-start;padding-top:2px}
+ .nxbox h2{font-size:26px}
+ .nxbox .ib{margin-top:16px;height:44px}
+ .nxbox .nxrow{margin-top:8px}
+ .nxbox .nxbtn{margin-top:2px}
+ .nxbox .nxsw{margin-top:10px}
+}
+
+@keyframes swAB{0%{clip-path:polygon(0 0,100% 0,100% 215px,0 172px)}45%{clip-path:polygon(0 0,100% 0,100% 100%,0 72%)}100%{clip-path:polygon(0 0,100% 0,100% 172px,0 215px)}}
+@keyframes swBA{0%{clip-path:polygon(0 0,100% 0,100% 172px,0 215px)}45%{clip-path:polygon(0 0,100% 0,100% 72%,0 100%)}100%{clip-path:polygon(0 0,100% 0,100% 215px,0 172px)}}
+@media(max-width:640px){
+ .nxbox .nxg{height:36px;margin-top:6px;font-size:13px}
+ .nxbox .curved{height:100%;background:linear-gradient(35deg,#0D111B 12%,#124DCC 58%,#168BFF);transition:none;clip-path:polygon(0 0,100% 0,100% 215px,0 172px)}
+ .nxbox.active .curved{clip-path:polygon(0 0,100% 0,100% 172px,0 215px)}
+ .nxbox.go.active .curved{animation:swAB 1.25s cubic-bezier(.65,0,.35,1) both}
+ .nxbox.go:not(.active) .curved{animation:swBA 1.25s cubic-bezier(.65,0,.35,1) both}
+ .nxbox .animation{transition-duration:.75s;transition-timing-function:cubic-bezier(.22,1,.36,1);transition-delay:calc(.35s + .045s*var(--D))}
+ .nxbox.active .fb.login .animation,.nxbox.rec .fb.login .animation,.nxbox .fb.register .animation,.nxbox .fb.recover .animation,.nxbox.active .info.login .animation,.nxbox .info.register .animation{transition-delay:calc(.03s*var(--S))}
+ .nxbox.active .fb.register .animation,.nxbox.active .info.register .animation{transition-delay:calc(.4s + .045s*(var(--D) - 17))}
+ .nxbox.rec .fb.recover .animation{transition-delay:calc(.2s + .05s*var(--D))}
+}
+
+/* ===== Button animations ===== */
+.nxbox .nxbtn{background:linear-gradient(#168BFF,#124DCC 55%,#0D3FAA);background-size:100% 220%;background-position:0 0;transition:transform .25s cubic-bezier(.22,1,.36,1),box-shadow .3s,background-position .5s,filter .3s;animation:nxpulse 2.8s ease-in-out infinite;isolation:isolate;-webkit-tap-highlight-color:transparent}
+.nxbox .nxbtn:before{content:"";display:block;position:absolute;top:0;left:-70%;width:45%;height:100%;z-index:-1;background:linear-gradient(100deg,transparent,rgba(255,255,255,.38),transparent);transform:skewX(-20deg);animation:nxshine 4.2s ease-in-out 1.2s infinite}
+.nxbox .nxbtn:hover,.nxbox .nxbtn:focus-visible{background-position:0 100%;transform:translateY(-2px);box-shadow:0 8px 26px rgba(22,119,255,.6),0 0 0 3px rgba(37,139,255,.25);animation:none;outline:0}
+.nxbox .nxbtn:hover:before{animation:nxshine .9s ease}
+.nxbox .nxbtn:active{transform:translateY(0) scale(.96);box-shadow:0 0 8px rgba(22,119,255,.5);transition-duration:.1s}
+.nxbox .nxbtn:disabled{animation:none;filter:saturate(.7)}
+.nxbox .nxbtn .rp{position:absolute;border-radius:50%;background:rgba(255,255,255,.45);transform:scale(0);pointer-events:none;z-index:-1;animation:nxrp .6s ease-out forwards}
+@keyframes nxshine{0%,55%{left:-70%}100%{left:130%}}
+@keyframes nxrp{to{transform:scale(1);opacity:0}}
+@keyframes nxpulse{50%{box-shadow:0 0 24px rgba(22,119,255,.75)}}
+.nxbox .nxsw a,.nxbox .lnk{position:relative;transition:color .25s,letter-spacing .25s}
+.nxbox .nxsw a:after,.nxbox .lnk:after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;border-radius:2px;background:#258BFF;transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.nxbox .nxsw a:hover:after,.nxbox .lnk:hover:after,.nxbox .nxsw a:focus-visible:after,.nxbox .lnk:focus-visible:after{transform:scaleX(1)}
+.nxbox .nxsw a:hover,.nxbox .nxsw a:hover:after{text-decoration:none}.nxbox .lnk:hover{text-decoration:none}
+.nxbox .nxeye{transition:transform .2s,color .2s}.nxbox .nxeye:hover{color:#fff}.nxbox .nxeye:active{transform:translateY(-50%) scale(.8)}
+.nxbox .chk input{transition:transform .2s}.nxbox .chk input:active{transform:scale(.8)}.nxbox .chk input:checked{animation:nxpop .3s}
+@keyframes nxpop{50%{transform:scale(1.35)}}
+@media(prefers-reduced-motion:reduce){.nxbox .nxbtn,.nxbox .nxbtn:before{animation:none!important}}
+
+/* ===== Profile footer, menu, pages, themes ===== */
+.pf{position:relative;flex:none;margin-top:4px;padding-top:8px;border-top:1px solid rgba(130,170,255,.18);display:flex;flex-direction:column;gap:2px}
+aside #list{min-height:0}
+.pf #acc,.pf #gsi{margin:0;padding:8px 10px;min-height:52px;border:1px solid transparent;border-radius:14px;background:transparent;text-align:left;transition:background .2s,border-color .2s,transform .15s}
+.pf #acc:hover,.pf #gsi:hover{background:rgba(47,107,255,.12);border-color:rgba(47,107,255,.35)}.pf #acc:active,.pf #acc[aria-expanded=true]{background:rgba(47,107,255,.2);border-color:var(--blue);transform:scale(.99)}
+.pf #acc .pt,.pf #gsi .pt{display:flex;flex-direction:column;min-width:0;flex:1;line-height:1.25}.pf #gsi .pt b,.pf #acc .pt b{font-size:14.5px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.pf #gsi .pt small,.pf #acc .pt small{font-size:11.5px;color:var(--mut);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pf #acc .chv{color:var(--mut);flex:none;transition:transform .25s}.pf #acc[aria-expanded=true] .chv{transform:rotate(180deg)}
+.pf .own{text-align:center;font-size:11px;color:var(--mut);padding:2px 0}
+.pmenu{position:absolute;left:0;right:0;bottom:calc(100% + 6px);z-index:30;background:#0B1322;border:1px solid var(--line);border-radius:16px;padding:6px;box-shadow:0 16px 44px #000b,0 0 0 1px rgba(47,107,255,.12);animation:pmi .18s ease both;max-height:min(60vh,420px);overflow:auto}
+@keyframes pmi{from{opacity:0;transform:translateY(8px) scale(.98)}}
+.pmenu button{display:flex;align-items:center;gap:12px;width:100%;min-height:44px;padding:8px 12px;border:0;border-radius:11px;background:none;color:var(--txt);font:inherit;font-size:14px;text-align:left;cursor:pointer;transition:background .15s}
+.pmenu button:hover,.pmenu button:active{background:rgba(47,107,255,.18)}.pmenu button svg{color:var(--lb);flex:none}.pmenu button span{flex:1;min-width:0}.pmenu em{font-style:normal;font-size:12px;color:var(--mut)}
+.pmenu button[data-m=out]{color:#FF9A9A;border-top:1px solid var(--line);border-radius:0 0 11px 11px;margin-top:4px}.pmenu button[data-m=out] svg{color:#FF9A9A}
+.dash .fl{display:block;font-size:13px;color:var(--mut);margin:14px 0 6px 2px}
+.dash .prow{display:flex;gap:16px;align-items:center;margin:14px 0 4px}
+.dash .brow{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}.dash .brow .abtn{width:auto;flex:1 1 140px}
+.dash input[readonly]{opacity:.75;border-style:dashed}
+.dash .sbox{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 14px;display:flex;flex-direction:column;gap:8px;font-size:13.5px;color:var(--mut);line-height:1.5}.dash .sbox b{color:var(--txt);word-break:break-all}
+.dash .seg{display:flex;gap:6px;flex-wrap:wrap}.dash .seg button{flex:1 1 90px;min-height:44px;padding:9px 12px;border-radius:12px;border:1px solid var(--line);background:var(--panel);color:var(--txt);font:inherit;font-size:14px;cursor:pointer;transition:background .2s,border-color .2s,transform .15s}
+.dash .seg button:active{transform:scale(.97)}.dash .seg button.on{background:linear-gradient(90deg,#1677FF,#124DCC);border-color:#258BFF;color:#fff;box-shadow:0 0 14px rgba(22,119,255,.4)}
+.mdl{position:fixed;inset:0;z-index:200;display:grid;place-items:center;padding:16px;background:#000a;animation:fi .2s}
+.mbox{width:100%;max-width:380px;background:#0B1322;border:1px solid var(--line);border-radius:20px;padding:20px;box-shadow:0 24px 70px #000c;color:var(--txt)}.mbox h3{font-size:18px;margin-bottom:8px}.mbox p{color:var(--mut);font-size:13.5px;line-height:1.55;margin-bottom:12px}.mbox .abtn{margin-top:8px}.mbox input{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--txt);font:inherit;font-size:16px}
+html[data-lang=en] .lb small{display:none}
+html[data-theme=light]{--bg:#F3F6FC;--side:#FFFFFF;--panel:#FFFFFF;--line:#D3DDF1;--txt:#0B1530;--mut:#586A8E;--gl:rgba(255,255,255,.88);--glb:rgba(47,107,255,.2)}
+html[data-theme=light] body{background:var(--bg)}
+html[data-theme=light] aside{background:rgba(255,255,255,.94)}
+html[data-theme=light] .sb:not(.pri){background:#EEF3FF;border-color:var(--line)}html[data-theme=light] .sb:not(.pri) .ic{background:#DCE7FF}
+html[data-theme=light] .pmenu,html[data-theme=light] .mbox{background:#fff}
+html[data-theme=light] .dash,html[data-theme=light] .dc{background:var(--bg)}html[data-theme=light] .dc{background:#fff}
+html[data-theme=light] .dash input,html[data-theme=light] .mbox input{background:#F3F6FC;color:var(--txt)}
+html[data-theme=light] .it:hover,html[data-theme=light] .it.on{background:#E6EEFF}
+html[data-theme=light] .m .b,html[data-theme=light] form#f{background:#fff;color:var(--txt)}
+html[data-theme=light] .au *{color-scheme:dark}
+#tp .av2{width:30px;height:30px;font-size:14px}#tp[hidden]{display:none}
+.dnav button{flex:0 0 auto}.dnav{scrollbar-width:none}.dnav::-webkit-scrollbar{display:none}
+.dnav #dx{position:sticky;right:0;z-index:2;background:var(--panel);box-shadow:-8px 0 8px var(--panel)}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8FB8FF"/><stop offset=".5" stop-color="#2F6BFF"/><stop offset="1" stop-color="#1B3FD1"/></linearGradient></defs></svg>
+<aside id="side">
+ <div class="brand"><svg viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="#05070D" stroke="#1A2744"/><path d="M8 24V8l16 16V12" fill="none" stroke="url(#g)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="7" r="2.2" fill="#9CC0FF"/></svg>Nexan Ai<button type="button" id="sx" aria-label="Close menu" title="Close · বন্ধ করুন"><svg class="i" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+ <button class="sb pri" id="new"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span><span class="lb"><b>New chat</b><small>নতুন চ্যাট</small></span></button>
+ <button class="sb" id="pb"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></span><span class="lb"><b>Projects</b><small>প্রজেক্ট</small></span></button>
+ <div id="pj" class="pj" style="display:none"></div>
+ <div class="sec" id="sec">Recent · সাম্প্রতিক</div>
+ <div id="list"></div>
+ <button class="sb" id="tb" style="display:none"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 16l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></svg></span><span class="lb"><b>Teach Nexan</b><small>Nexan-কে শেখান</small></span></button>
+ <div class="pf"><div class="pmenu" id="pmenu" role="menu" hidden><button type="button" role="menuitem" data-m="profile"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg><span>My Profile · আমার প্রোফাইল</span></button><button type="button" role="menuitem" data-m="settings"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 0-.1-1.2l2-1.5-2-3.4-2.3 1a7 7 0 0 0-2-1.2L14 3h-4l-.6 2.7a7 7 0 0 0-2 1.2l-2.3-1-2 3.4 2 1.5A7 7 0 0 0 5 12c0 .4 0 .8.1 1.2l-2 1.5 2 3.4 2.3-1a7 7 0 0 0 2 1.2L10 21h4l.6-2.7a7 7 0 0 0 2-1.2l2.3 1 2-3.4-2-1.5c.1-.4.1-.8.1-1.2z"/></svg><span>Account Settings · অ্যাকাউন্ট সেটিংস</span></button><button type="button" role="menuitem" data-m="personal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg><span>Personalization · পছন্দ</span></button><button type="button" role="menuitem" data-m="theme"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><span>Theme · থিম</span><em id="pmt"></em></button><button type="button" role="menuitem" data-m="help"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1 .9-1 1.7M12 17h.01"/></svg><span>Help &amp; Support · সাহায্য</span></button><button type="button" role="menuitem" data-m="out"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg><span>Sign Out · সাইন আউট</span></button></div>
+ <button id="gsi" type="button" hidden><span class="av2">?</span><span class="pt"><b>Sign in · সাইন ইন</b><small>Log in or sign up · লগইন বা সাইন আপ</small></span></button>
+ <button id="acc" type="button" hidden aria-haspopup="menu" aria-expanded="false"><span class="av2"></span><span class="pt"><b></b><small>Personal Account · ব্যক্তিগত অ্যাকাউন্ট</small></span><svg class="chv" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15l6-6 6 6"/></svg></button>
+ <div class="own">By <b>Ruhul</b></div></div>
+</aside>
+<div id="ov"></div>
+<main>
+ <div class="bar"><button class="rb" id="menu" aria-label="Menu"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 8h16M4 16h10"/></svg></button><b id="bt">Nexan Ai</b><button class="rb" id="nb" aria-label="New chat" title="New chat · নতুন চ্যাট"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6"/><path d="M18.4 2.6a2 2 0 0 1 2.8 2.8L12 14.6 8 16l1.4-4z"/></svg></button><button class="rb" id="tp" type="button" aria-label="Sign in"></button></div>
+ <div id="msgs"></div>
+ <div id="wel">
+  <svg class="big" viewBox="0 0 32 32"><path class="dr" pathLength="1" d="M8 24V8l16 16V12" fill="none" stroke="url(#g)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle class="sp" cx="24" cy="7" r="2.2" fill="#9CC0FF" style="transform-origin:24px 7px"/></svg>
+  <h1>How can I help you today?<small>আজ কীভাবে সাহায্য করতে পারি?</small></h1>
+  <p>Chat, search the web, read files, create images<br>চ্যাট করুন, ওয়েব সার্চ করুন, ফাইল পড়ান, ছবি বানান</p>
+  <div id="sug">
+   <button type="button" data-k="img"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="1.6"/><path d="M4 18l5-5 4 4 3-3 4 4"/></svg><b>Create an image</b><small>ছবি বানান</small></button>
+   <button type="button" data-k="web"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.2 3 14.8 0 18M12 3c-3 3.2-3 14.8 0 18"/></svg><b>Search the web</b><small>ইন্টারনেটে খুঁজুন</small></button>
+   <button type="button" data-k="file"><svg class="i" viewBox="0 0 24 24"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/></svg><b>Read a PDF or file</b><small>ফাইল পড়ান</small></button>
+   <button type="button" data-k="code"><svg class="i" viewBox="0 0 24 24"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M13.5 6l-3 12"/></svg><b>Solve with code</b><small>হিসাব করান</small></button>
+  </div>
+  <div class="tag">By Ruhul</div>
+ </div>
+ <div class="foot">
+  <div id="strip"></div>
+  <div id="tools">
+   <button type="button" id="ws" class="tl" aria-pressed="false"><svg class="i s" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.2 3 14.8 0 18M12 3c-3 3.2-3 14.8 0 18"/></svg>Search<small>সার্চ</small></button>
+   <button type="button" id="gi" class="tl" aria-pressed="false"><svg class="i s" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="1.6"/><path d="M4 18l5-5 4 4 3-3 4 4"/></svg>Image<small>ছবি</small></button>
+   <button type="button" id="cx" class="tl" aria-pressed="false"><svg class="i s" viewBox="0 0 24 24"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M13.5 6l-3 12"/></svg>Code<small>কোড</small></button>
+   <button type="button" id="ar" class="tl" aria-pressed="false"><svg class="i s" viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg>Auto-read<small>অটো-রিড</small></button>
+  </div>
+  <form id="f">
+   <button type="button" id="at" title="Upload image · ছবি দিন" aria-label="Upload image"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></button>
+   <button type="button" id="mic" title="Record voice message · ভয়েস মেসেজ রেকর্ড" aria-label="Voice message"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button>
+   <textarea id="in" rows="1"></textarea>
+   <button type="button" id="vc" title="Voice conversation · ভয়েস কথোপকথন" aria-label="Voice conversation"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 10v4M8 7v10M12 4v16M16 8v8M20 11v2"/></svg></button>
+   <button id="go" aria-label="Send"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+  </form>
+ </div>
+</main>
+<input type="file" id="fi" accept="image/*,application/pdf,audio/*,video/*,.txt,.md,.csv,.json,.html,.js,.py,.css,.xml,.log" multiple hidden>
+<div id="vo" role="dialog" aria-label="Voice conversation">
+ <div class="vt"><button type="button" id="vl">বাংলা</button><span></span></div>
+ <div id="vm"><button type="button" id="vb" aria-label="Tap to interrupt"></button><div id="vs"></div><div id="vtx"></div></div>
+ <button type="button" id="ve" aria-label="End voice · শেষ করুন" title="End · শেষ"><svg class="i" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+</div>
+<div id="drop">Drop files here<br>ফাইল এখানে ছাড়ুন</div>
+<dialog id="teach">
+ <div class="dh"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 16l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></svg></span><div><h2>Teach Nexan</h2><div class="sub">Nexan-কে শেখান</div></div><button class="x" id="tc" aria-label="Close">✕</button></div>
+ <p class="hint">Add your own facts. When anyone asks about your keywords, Nexan answers with this info.<br>নিজের তথ্য যোগ করুন। যে-কেউ আপনার কীওয়ার্ড নিয়ে প্রশ্ন করলে Nexan এই তথ্য দিয়ে উত্তর দেবে।</p>
+ <div class="card">
+  <div id="pwrow" class="pw"><input class="fld" id="pw" type="password" placeholder="Admin password · অ্যাডমিন পাসওয়ার্ড" autocomplete="current-password"><button class="btn" id="pwb" type="button">Unlock · খুলুন</button></div>
+  <div id="tform">
+  <label>1 · Keywords <small>কীওয়ার্ড</small></label>
+  <div class="chipbox" id="cb"><span id="chips"></span><input id="tk" placeholder="Type &amp; press Enter · লিখে Enter চাপুন"></div>
+  <div class="eg">e.g. fee, price, course, ফি, দাম, কোর্স</div>
+  <label>2 · Info <small>তথ্য</small></label>
+  <textarea class="fld" id="tt" rows="3" placeholder="Our course fee is 5000 Taka. · আমাদের কোর্সের ফি ৫০০০ টাকা।"></textarea>
+  <button class="btn" id="ts">Save · সেভ করুন</button>
+  <button class="cp" id="lock" type="button" style="align-self:center">Lock · লক করুন</button>
+  </div>
+  <div class="eg" id="tmsg" role="status"></div>
+ </div>
+ <div class="lh">Taught so far · যা শেখানো হয়েছে <b id="cnt">0</b></div>
+ <div id="tl"></div>
+</dialog>
+<dialog id="proj">
+ <div class="dh"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></span><div><h2>Projects</h2><div class="sub">প্রজেক্ট</div></div><button class="x" id="pc" aria-label="Close">✕</button></div>
+ <p class="hint">Create a project with a topic. Every chat inside it stays on that topic.<br>একটি টপিক দিয়ে প্রজেক্ট বানান। এর ভেতরের সব চ্যাট ওই টপিক নিয়েই কথা বলবে। (শুধু এই ব্রাউজারে সেভ হয়)</p>
+ <div class="card">
+  <label>1 · Project name <small>প্রজেক্টের নাম</small></label>
+  <input class="fld" id="pn" maxlength="60" placeholder="e.g. Spoken English · স্পোকেন ইংলিশ" autocomplete="off">
+  <label>2 · Topic &amp; instructions <small>টপিক ও নির্দেশনা</small></label>
+  <textarea class="fld" id="pt" rows="4" placeholder="This project is about learning English. Reply simply, give examples. · এই প্রজেক্ট ইংরেজি শেখা নিয়ে। সহজ ভাষায় উদাহরণ দিয়ে উত্তর দাও।"></textarea>
+  <button class="btn" id="ps">Create project · প্রজেক্ট বানান</button>
+  <button class="cp" id="pcx" type="button" style="display:none;align-self:center">Cancel edit · বাতিল</button>
+ </div>
+ <div class="lh">Your projects · আপনার প্রজেক্ট <b id="pcnt">0</b></div>
+ <div id="pl" style="padding:0 18px 20px;display:flex;flex-direction:column;gap:8px"></div>
+</dialog>
+
+<div id="au" class="au" hidden><button type="button" id="auc" aria-label="Close · বন্ধ করুন" title="Close · বন্ধ করুন">✕</button><div class="nxw" id="nxw"><div class="nxbox" id="nxb">
+<div class="curved"></div><div class="curved2"></div>
+<div class="fb login"><form id="lf" novalidate>
+<h2 class="animation" style="--D:0;--S:21">Login</h2>
+<div class="ib animation" style="--D:1;--S:20"><input id="lid" type="text" placeholder=" " autocomplete="username" maxlength="120" autocapitalize="none" spellcheck="false"><label for="lid">Username or email</label><span class="nxic" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0z"/></svg></span></div>
+<div class="ib animation" style="--D:2;--S:19"><input id="lpw" type="password" placeholder=" " autocomplete="current-password" maxlength="100" autocapitalize="none" spellcheck="false"><label for="lpw">Password</label><button type="button" class="nxeye" data-for="lpw" aria-label="Show password" aria-pressed="false"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
+<div class="nxrow animation" style="--D:3;--S:18"><label class="chk"><input type="checkbox" id="arm" checked>Remember me</label><button type="button" id="afg" class="lnk">Forgot Password?</button></div>
+<div class="nxer" id="ler" role="alert" aria-live="polite"></div>
+<button class="nxbtn animation" id="lbtn" style="--D:4;--S:17">Login</button>
+<button type="button" class="nxg animation" id="glg" style="--D:5;--S:16"><svg class="gi" viewBox="0 0 48 48" width="18" height="18" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg><span>Continue with Google</span></button>
+<div class="nxsw animation" style="--D:6;--S:15"><p>Don't have an account?<br><a href="#" id="tosu">Sign Up</a></p></div></form></div>
+<div class="info login"><h2 class="animation" style="--D:0;--S:20">NEXAN AI</h2><p class="animation" style="--D:1;--S:19">আপনার স্মার্ট বাংলা ও English AI সহকারী।<br>Your smart Bangla &amp; English AI assistant.</p><ul class="feat animation" style="--D:2;--S:18"><li>Smart chat · স্মার্ট চ্যাট</li><li>Image understanding · ছবি বোঝা</li><li>Image generation · ছবি আঁকা</li><li>Voice chat · ভয়েস</li></ul></div>
+<div class="fb register"><form id="rf" novalidate>
+<h2 class="animation" style="--D:17;--S:0">Register</h2>
+<div class="ib animation" style="--D:18;--S:1"><input id="run" type="text" placeholder=" " autocomplete="nickname" maxlength="24" autocapitalize="none" spellcheck="false"><label for="run">Username</label><span class="nxic" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0z"/></svg></span></div>
+<div class="ib animation" style="--D:19;--S:2"><input id="rem" type="email" placeholder=" " autocomplete="email" maxlength="120" autocapitalize="none" spellcheck="false"><label for="rem">Email</label><span class="nxic" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M3 5h18a1 1 0 0 1 1 1v.5l-10 6.5L2 6.5V6a1 1 0 0 1 1-1zm19 3.9V18a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V8.9l10 6.5z"/></svg></span></div>
+<div class="ib animation" style="--D:20;--S:3"><input id="rpw" type="password" placeholder=" " autocomplete="new-password" maxlength="100" autocapitalize="none" spellcheck="false"><label for="rpw">Password</label><button type="button" class="nxeye" data-for="rpw" aria-label="Show password" aria-pressed="false"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
+<div class="nxer" id="rer" role="alert" aria-live="polite"></div>
+<button class="nxbtn animation" id="rbtn" style="--D:21;--S:4">Register</button>
+<button type="button" class="nxg animation" id="grg" style="--D:22;--S:5"><svg class="gi" viewBox="0 0 48 48" width="18" height="18" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg><span>Continue with Google</span></button>
+<div class="nxsw animation" style="--D:23;--S:6"><p>Already have an account?<br><a href="#" id="tosi">Sign In</a></p></div></form></div>
+<div class="info register"><h2 class="animation" style="--D:17;--S:0">JOIN NEXAN AI</h2><p class="animation" style="--D:18;--S:1">এক অ্যাকাউন্টে সব ফিচার।<br>One account, every feature.</p><ul class="feat animation" style="--D:19;--S:2"><li>PDF, audio &amp; video reading</li><li>Web search &amp; code · সার্চ ও কোড</li><li>Teach Nexan · নিজের তথ্য শেখান</li><li>Projects · প্রজেক্ট</li></ul></div>
+<div class="fb recover"><form id="ff" novalidate>
+<h2 class="animation" style="--D:0;--S:21">Recover</h2>
+<p class="nxhint animation" style="--D:1;--S:20">Enter your account email and we will send a reset link.</p>
+<div class="ib animation" style="--D:2;--S:19"><input id="fem" type="email" placeholder=" " autocomplete="email" maxlength="120" autocapitalize="none" spellcheck="false"><label for="fem">Email</label><span class="nxic" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M3 5h18a1 1 0 0 1 1 1v.5l-10 6.5L2 6.5V6a1 1 0 0 1 1-1zm19 3.9V18a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V8.9l10 6.5z"/></svg></span></div>
+<div class="nxer" id="fer" role="alert" aria-live="polite"></div>
+<button class="nxbtn animation" id="fbtn" style="--D:3;--S:18">Send reset link</button>
+<div class="nxsw animation" style="--D:4;--S:17"><p>Remembered it?<br><a href="#" id="tobk">Back to Login</a></p></div></form></div>
+</div></div></div>
+<div id="dash" class="dash" hidden><div class="dwrap"><div class="dnav" id="dnav"></div><div id="dv"></div></div></div>
+<script>
+const $=s=>document.querySelector(s);
+let db=null,chats=[],cur=null,KB=[],busy=false,pend=[],projs=[],curProj=null,editP=null;
+const ls={get:k=>{try{return localStorage.getItem(k)||''}catch(e){return ''}},set:(k,v)=>{try{v?localStorage.setItem(k,v):localStorage.removeItem(k)}catch(e){}}};
+let PW=ls.get('nx_pw'),LOC=false;
+// fetch with the optional site access code (asked once, when the owner turned ACCESS_CODE on)
+async function nfetch(u,o={}){
+ const go=()=>fetch(u,{...o,headers:{...(o.headers||{}),'x-access-code':ls.get('nx_code')}});
+ let r=await go();
+ if(r.status===401){const d=await r.clone().json().catch(()=>({}));
+  if(d.needLogin){AU.user=null;AU.on=true;acc();showAu('login');return r}
+   if(d.needCode){const c=prompt('Enter access code · অ্যাক্সেস কোড দিন');if(c){ls.set('nx_code',c.trim());r=await go()}}}
+ return r}
+let PREF={theme:'dark',lang:'both'},LANG='both';
+try{Object.assign(PREF,JSON.parse(localStorage.getItem('nx_pref')||'{}'))}catch(e){}
+LANG=PREF.lang;
+const T=(en,bn)=>LANG==='en'?en:LANG==='bn'?bn:en+' · '+bn;
+const mqL=window.matchMedia?matchMedia('(prefers-color-scheme: light)'):null;
+function applyTheme(){document.documentElement.dataset.theme=PREF.theme==='system'?(mqL&&mqL.matches?'light':'dark'):PREF.theme}
+if(mqL&&mqL.addEventListener)mqL.addEventListener('change',()=>{if(PREF.theme==='system')applyTheme()});
+const BNRE=/[\u0980-\u09FF]/,SPL=/^(\s*)(.+?) · (.+?)(\s*)$/,TXO=new WeakMap();
+function applyLang(){LANG=PREF.lang;document.documentElement.dataset.lang=LANG;const w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);let n;
+ while(n=w.nextNode()){if(n.parentElement.closest('#msgs,#list,textarea,script,style'))continue;let o=TXO.get(n);
+  if(o===undefined){const m=SPL.exec(n.data);if(!m||!BNRE.test(m[3])||BNRE.test(m[2]))continue;o=n.data;TXO.set(n,o)}
+  const m=SPL.exec(o);n.data=LANG==='en'?m[1]+m[2]+m[4]:LANG==='bn'?m[1]+m[3]+m[4]:o}}
+applyTheme();
+
+// ---- Database: IndexedDB (stores: chats, kb) ----
+const idb=()=>new Promise((ok,no)=>{const r=indexedDB.open('bdai',2);
+ r.onupgradeneeded=()=>{['chats','kb','projects'].forEach(n=>{if(!r.result.objectStoreNames.contains(n))r.result.createObjectStore(n,{keyPath:'id'})})};
+ r.onsuccess=()=>ok(r.result);r.onerror=()=>no(r.error)});
+const rq=r=>new Promise((ok,no)=>{r.onsuccess=()=>ok(r.result);r.onerror=()=>no(r.error)});
+const st=(n,w)=>db.transaction(n,w?'readwrite':'readonly').objectStore(n);
+let loaded=false,KBP=Promise.resolve();
+async function init(){
+ if(loaded)return;loaded=true;
+ try{db=await idb();chats=await rq(st('chats').getAll());projs=await rq(st('projects').getAll());KB=(await rq(st('kb').getAll())).filter(k=>k.u)}catch(e){db=null}
+ const own=KB; // knowledge loads in the background; the UI never waits for it (send() awaits KBP only when it needs it)
+ KBP=Promise.all([fetch('kb.json').then(r=>r.json()).catch(()=>[]),fetch('/api/kb',{cache:'no-store'}).then(r=>r.ok?r.json():{}).then(j=>j.entries||[]).catch(()=>[])]).then(([base,gl])=>{KB=base.concat(gl,own)});
+ chats.sort((a,b)=>b.t-a.t);side();fresh();holder();
+ if(PW||location.hash==='#admin')$('#tb').style.display='';
+}
+// Guest view: instant, no storage or network. Also used on sign-out so the next person never sees the last user's chats.
+function guestView(){loaded=false;chats=[];projs=[];KB=[];KBP=Promise.resolve();curProj=null;editP=null;pend=[];strip();stopSpeak();fresh();holder()}
+
+// ---- Knowledge retrieval (keyword match, handles Bangla suffixes) ----
+const tk=s=>(s.toLowerCase().match(/[\p{L}\p{M}\p{N}]+/gu)||[]);
+function ctx(q){
+ const qt=tk(q);
+ return KB.map(k=>({k,s:tk(k.keys.join(' ')).filter(w=>qt.some(t=>w.length<3?t===w:t.startsWith(w))).length}))
+  .filter(x=>x.s>0).sort((a,b)=>b.s-a.s).slice(0,4).map(x=>x.k.text);
+}
+
+// ---- Safe mini-markdown ----
+const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const md=s=>esc(s).replace(/```(?:\w*\n)?([\s\S]*?)```/g,'<pre><code>$1</code></pre>')
+ .replace(/`([^`\n]+)`/g,'<code>$1</code>').replace(/\*\*([^*\n]+)\*\*/g,'<b>$1</b>').replace(/^#{1,3} (.+)$/gm,'<b>$1</b>');
+
+// ---- Chats ----
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+function fresh(){stopSpeak();cur={id:uid(),title:'New chat',t:Date.now(),msgs:[],pid:curProj};$('#msgs').innerHTML='';$('#wel').style.display='';side();$('#side').classList.remove('open')}
+function load(id){cur=chats.find(c=>c.id===id);$('#msgs').innerHTML='';
+ $('#wel').style.display=cur.msgs.length?'none':'';cur.msgs.forEach(m=>{if(m.gen){const b=add('assistant','',1);stopThink();showGen(b,m.gen,m.content)}else add(m.role,m.content,0,m.imgs,m.files)});side();$('#side').classList.remove('open')}
+function save(){if(!chats.includes(cur))chats.push(cur);chats.sort((a,b)=>b.t-a.t);if(db)st('chats',1).put(cur)}
+function del(id){chats=chats.filter(c=>c.id!==id);if(db)st('chats',1).delete(id);cur&&cur.id===id?fresh():side()}
+function side(){const l=$('#list');l.innerHTML='';projUI();const vis=chats.filter(c=>(c.pid||null)===curProj);
+ if(!vis.length){l.innerHTML='<div class="empty">No chats yet<br>কোনো চ্যাট নেই</div>';return}
+ vis.forEach(c=>{const d=document.createElement('div');d.className='it'+(cur&&c.id===cur.id?' on':'');
+  const s=document.createElement('span');s.textContent=c.title;const x=document.createElement('button');x.textContent='✕';x.title=T('Delete','মুছুন');
+  x.onclick=e=>{e.stopPropagation();del(c.id)};d.onclick=()=>load(c.id);d.append(s,x);l.append(d)})}
+
+// ---- Messages ----
+const LOGO='<svg viewBox="0 0 32 32"><path d="M8 24V8l16 16V12" fill="none" stroke="url(#g)" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="7" r="2.4" fill="#9CC0FF"/></svg>';
+const IC={
+ spk:'<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg>',
+ stop:'<svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><rect x="6.5" y="6.5" width="11" height="11" rx="2.5"/></svg>',
+ copy:'<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M5 15V6a2 2 0 0 1 2-2h8"/></svg>',
+ dl:'<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>',
+ ok:'<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>'};
+function actBtn(kind,title,fn){const b=document.createElement('button');b.type='button';b.innerHTML=IC[kind];b.title=title;b.setAttribute('aria-label',title);
+ b.onclick=async()=>{try{await fn();b.innerHTML=IC.ok;b.classList.add('ok');setTimeout(()=>{b.innerHTML=IC[kind];b.classList.remove('ok')},1500)}catch(e){toast(T('Could not do that on this device.','এই ডিভাইসে হলো না।'))}};return b}
+async function copyText(t){
+ try{await navigator.clipboard.writeText(t)}
+ catch(e){const a=document.createElement('textarea');a.value=t;a.style.cssText='position:fixed;opacity:0';document.body.append(a);a.select();const ok=document.execCommand('copy');a.remove();if(!ok)throw e}}
+function saveBlob(bl,name){const u=URL.createObjectURL(bl),a=document.createElement('a');a.href=u;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),4000)}
+async function getBlob(src){const r=await fetch(src);if(!r.ok)throw new Error('img');return await r.blob()}
+async function asPng(bl){if(bl.type==='image/png')return bl;const bm=await createImageBitmap(bl),c=document.createElement('canvas');c.width=bm.width;c.height=bm.height;c.getContext('2d').drawImage(bm,0,0);
+ return await new Promise((ok,no)=>c.toBlob(x=>x?ok(x):no(new Error('png')),'image/png'))}
+function actions(col,o){const old=col.querySelector('.acts');if(old)old.remove();
+ const w=document.createElement('div');w.className='acts';
+ if(o.img){
+  w.append(actBtn('copy',T('Copy image','ছবি কপি'),async()=>{const bl=await asPng(await getBlob(o.img));await navigator.clipboard.write([new ClipboardItem({'image/png':bl})])}));
+  w.append(actBtn('dl',T('Download image','ছবি ডাউনলোড'),async()=>{try{saveBlob(await getBlob(o.img),'nexan-image.png')}catch(e){window.open(o.img,'_blank','noopener')}}));
+ }
+ if(o.text){
+  w.append(actBtn('copy',T('Copy text','লেখা কপি'),()=>copyText(o.text)));
+  if(SYN){const sb=document.createElement('button');sb.type='button';sb.className='spk';sb.innerHTML=IC.spk;sb.title=T('Read aloud','পড়ে শোনাও');sb.setAttribute('aria-label','Read aloud');
+   sb.onclick=()=>{if(spkBtn===sb)stopSpeak();else speakText(o.text,null,sb)};w.append(sb)}
+  w.append(actBtn('dl',T('Download text','লেখা ডাউনলোড'),()=>saveBlob(new Blob([o.text],{type:'text/plain;charset=utf-8'}),'nexan-reply.txt')));
+ }
+ col.append(w)}
+function copyBtn(col,text){actions(col,{text})}
+function add(role,text,dots,imgs,files){
+ const u=role==='user',m=document.createElement('div');m.className='m '+(u?'u':'a');
+ if(!u){const a=document.createElement('div');a.className='av'+(dots?' think':'');a.innerHTML=LOGO;m.append(a)}
+ const col=document.createElement('div');col.className='col';
+ if(imgs&&imgs.length){const w=document.createElement('div');w.className='imgs';imgs.forEach(src=>{const i=document.createElement('img');i.src=src;w.append(i)});col.append(w)}
+ if(files&&files.length){const w=document.createElement('div');w.className='imgs';files.forEach(f=>{const c=document.createElement('span');c.className='fchip';c.textContent=fico(f.mime)+' '+f.name;w.append(c)});col.append(w)}
+ const b=document.createElement('div');b.className='b';
+ if(dots)b.innerHTML='<span class="dots"><span></span><span></span><span></span><span></span><span></span></span>';
+ else if(u)b.textContent=text;else b.innerHTML=md(text);
+ if(!(u&&!text))col.append(b);if(!u&&!dots&&text)copyBtn(col,text);m.append(col);$('#msgs').append(m);$('#msgs').scrollTop=1e9;return b}
+const stopThink=()=>document.querySelectorAll('.av.think').forEach(a=>a.classList.remove('think'));
+const type=(b,t)=>new Promise(ok=>{stopThink();b.textContent='';let i=0;const step=Math.max(2,Math.ceil(t.length/150));
+ const id=setInterval(()=>{i+=step;b.textContent=t.slice(0,i);$('#msgs').scrollTop=1e9;
+  if(i>=t.length){clearInterval(id);b.innerHTML=md(t);copyBtn(b.parentNode,t);ok()}},16)});
+
+// ---- Images: pick, paste, drag-drop (resized to keep uploads small) ----
+async function shrink(f){
+ const bm=await createImageBitmap(f),k=Math.min(1,1280/Math.max(bm.width,bm.height));
+ const c=document.createElement('canvas');c.width=Math.round(bm.width*k);c.height=Math.round(bm.height*k);
+ const x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,c.width,c.height);x.drawImage(bm,0,0,c.width,c.height);
+ return{url:c.toDataURL('image/jpeg',.82)}}
+const FMAX=2.3e6,TMAX=3.2e6; // one file up to ~2.3 MB, all attachments together ~3.2 MB after base64 (keeps requests small and fast)
+const sz=x=>x.file?x.data.length:x.url.length,tot=()=>pend.reduce((a,x)=>a+sz(x),0);
+const toast=m=>{const t=document.createElement('div');t.className='toast';t.textContent=m;document.body.append(t);setTimeout(()=>t.remove(),3800)};
+const b64=f=>new Promise((ok,no)=>{const r=new FileReader();r.onload=()=>ok(String(r.result).split(',')[1]);r.onerror=no;r.readAsDataURL(f)});
+const TXT=/\.(txt|md|csv|json|html|js|py|css|xml|log)$/i;
+const fico=m=>m.startsWith('audio/')?'Audio':m.startsWith('video/')?'Video':m==='application/pdf'?'PDF':'Text';
+async function addFiles(fs){
+ if(needLogin())return;
+ for(const f of fs){if(pend.length>=4){toast(T('Maximum 4 files at a time.','একসাথে সর্বোচ্চ ৪টি ফাইল।'));break}
+  try{
+   if(f.type.startsWith('image/')){const im=await shrink(f);if(tot()+im.url.length>TMAX){toast(T('Attachments are too large together (max ~2 MB).','সব ফাইল মিলিয়ে অনেক বড় (সর্বোচ্চ ~২ MB)।'));continue}pend.push(im);continue}
+   const ok=f.type==='application/pdf'||/^(audio|video)\//.test(f.type)||f.type.startsWith('text/')||TXT.test(f.name);
+   if(!ok){toast(T('This file type is not supported.','এই ধরনের ফাইল চলবে না।'));continue}
+   if(f.size>FMAX){toast(T('File is too big (max 2 MB). Please use a smaller file.','ফাইল অনেক বড় (সর্বোচ্চ ২ MB)। ছোট ফাইল দিন।'));continue}
+   const mime=f.type==='application/pdf'||/^(audio|video)\//.test(f.type)?f.type:'text/plain';
+   const dd=await b64(f);if(tot()+dd.length>TMAX){toast(T('Attachments are too large together (max ~2 MB).','সব ফাইল মিলিয়ে অনেক বড় (সর্বোচ্চ ~২ MB)।'));continue}pend.push({file:1,name:f.name||'file',mime,data:dd})
+  }catch(e){}}
+ strip();upd()}
+function strip(){const s=$('#strip');s.innerHTML='';pend.forEach((im,i)=>{const d=document.createElement('div');d.className=im.file?'th fc':'th';
+ let g;if(im.file){g=document.createElement('span');g.textContent=fico(im.mime)+' '+im.name}else{g=document.createElement('img');g.src=im.url}
+ const x=document.createElement('button');x.type='button';x.textContent='✕';x.title='Remove · সরান';x.setAttribute('aria-label','Remove');
+ x.onclick=()=>{pend.splice(i,1);strip();upd()};d.append(g,x);s.append(d)})}
+// ---- Voice message: record, convert to WAV (16 kHz), send ----
+async function wav16(blob){
+ const AC=window.AudioContext||window.webkitAudioContext,ac=new AC(),buf=await ac.decodeAudioData(await blob.arrayBuffer());if(ac.close)ac.close();
+ const oc=new OfflineAudioContext(1,Math.max(1,Math.ceil(buf.duration*16000)),16000),src=oc.createBufferSource();src.buffer=buf;src.connect(oc.destination);src.start();
+ const d=(await oc.startRendering()).getChannelData(0),v=new DataView(new ArrayBuffer(44+d.length*2)),w=(o,t)=>{for(let k=0;k<t.length;k++)v.setUint8(o+k,t.charCodeAt(k))};
+ w(0,'RIFF');v.setUint32(4,36+d.length*2,true);w(8,'WAVEfmt ');v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,1,true);v.setUint32(24,16000,true);v.setUint32(28,32000,true);v.setUint16(32,2,true);v.setUint16(34,16,true);w(36,'data');v.setUint32(40,d.length*2,true);
+ for(let k=0;k<d.length;k++){const x=Math.max(-1,Math.min(1,d[k]));v.setInt16(44+k*2,x<0?x*32768:x*32767,true)}
+ return new Blob([v],{type:'audio/wav'})}
+let rec=null;
+$('#mic').onclick=async()=>{
+ if(rec){rec.stop();return}
+ if(busy)return;
+ if(needLogin())return;
+ if(!await micGate())return;
+ try{
+  const st=await navigator.mediaDevices.getUserMedia({audio:true}),chunks=[],mr=new MediaRecorder(st);rec=mr;
+  mr.ondataavailable=e=>chunks.push(e.data);
+  mr.onstop=async()=>{st.getTracks().forEach(t=>t.stop());rec=null;$('#mic').classList.remove('on');
+   try{const w=await wav16(new Blob(chunks,{type:mr.mimeType}));
+    if(w.size>FMAX){toast(T('Recording is too long. Keep it under 60 seconds.','রেকর্ডিং অনেক লম্বা। ৬০ সেকেন্ডের মধ্যে রাখুন।'));return}
+    pend.push({file:1,name:'voice.wav',mime:'audio/wav',data:await b64(w)});strip();upd();send()
+   }catch(e){toast(T('Could not read the recording.','রেকর্ডিং পড়া যায়নি।'))}};
+  mr.start();$('#mic').classList.add('on');toast(T('Recording… tap the mic again to send.','রেকর্ড হচ্ছে… পাঠাতে আবার মাইকে চাপুন।'));
+  setTimeout(()=>{if(rec===mr)mr.stop()},70000)
+ }catch(e){toast(T('Please allow the microphone.','মাইক্রোফোনের অনুমতি দিন।'))}};
+$('#at').onclick=()=>{if(needLogin())return;$('#fi').click()};
+$('#fi').onchange=e=>{addFiles([...e.target.files]);e.target.value=''};
+addEventListener('paste',e=>{const fs=[...(e.clipboardData?e.clipboardData.files:[])];if(fs.length){e.preventDefault();addFiles(fs)}});
+addEventListener('dragover',e=>{e.preventDefault();$('#drop').classList.add('on')});
+addEventListener('dragleave',e=>{if(!e.relatedTarget)$('#drop').classList.remove('on')});
+addEventListener('drop',e=>{e.preventDefault();$('#drop').classList.remove('on');addFiles([...e.dataTransfer.files])});
+
+// ---- Send ----
+// ---- Image generation ----
+let genMode=false;
+const GEN_RE=[/^\s*\/(image|img|draw)\b/i,/^\s*(draw|imagine|paint)\s+\S/i,
+ /\b(generate|create|make|draw|paint|design)\b.{0,25}\b(image|picture|photo|logo|wallpaper|illustration|poster|drawing)\b/i,
+ /(ছবি|ইমেজ|লোগো|পোস্টার|চিত্র).{0,20}(আঁক|এঁক|আকো|আকুন|আকতে|বানাও|বানিয়ে|বানাতে|বানাই|তৈরি|তৈরী|জেনারেট)/];
+const isGen=t=>!/\b(how|why|what is|explain)\b|কীভাবে|কিভাবে|কেন/i.test(t)&&GEN_RE.some(r=>r.test(t));
+const gprompt=t=>t.replace(/^\s*\/(image|img|draw)\s*/i,'').trim()||t;
+function setGen(v){genMode=v;$('#gi').classList.toggle('on',v);$('#gi').setAttribute('aria-pressed',v)}
+$('#gi').onclick=()=>{setGen(!genMode);$('#in').focus()};
+let wsMode=false,cxMode=false;
+function setWs(v){wsMode=v;$('#ws').classList.toggle('on',v);$('#ws').setAttribute('aria-pressed',v)}
+function setCx(v){cxMode=v;$('#cx').classList.toggle('on',v);$('#cx').setAttribute('aria-pressed',v)}
+$('#ws').onclick=()=>{setWs(!wsMode);$('#in').focus()};
+$('#cx').onclick=()=>{setCx(!cxMode);$('#in').focus()};
+const SUG={
+ img:()=>{setGen(true);$('#in').value='A beautiful flower garden at sunrise';},
+ web:()=>{setWs(true);$('#in').value="What are today's top news headlines?";},
+ code:()=>{setCx(true);$('#in').value='Calculate 15% of 2480 and the square root of 1764, and show the steps';},
+ file:()=>$('#fi').click()};
+document.querySelectorAll('#sug button').forEach(b=>b.onclick=()=>{if(needLogin())return;SUG[b.dataset.k]();grow();upd();$('#in').focus()});
+const pollinate=p=>new Promise((ok,no)=>{
+ const u='https://image.pollinations.ai/prompt/'+encodeURIComponent(p)+'?width=1024&height=1024&nologo=true&model=flux&seed='+Math.floor(Math.random()*1e6);
+ const i=new Image(),t=setTimeout(()=>no(new Error('timeout')),40000);
+ i.onload=()=>{clearTimeout(t);ok(u)};i.onerror=()=>{clearTimeout(t);no(new Error('load'))};i.src=u});
+async function makeImage(prompt,images){
+ let d={},st=0;
+ for(let i=0;i<2;i++){
+  try{const r=await nfetch('/api/image',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt,images:images||[]})});
+   st=r.status;
+   if(r.ok&&(r.headers.get('content-type')||'').startsWith('image/')){const bl=await r.blob();return await new Promise((ok,no)=>{const fr=new FileReader();fr.onload=()=>ok(fr.result);fr.onerror=no;fr.readAsDataURL(bl)})}
+   d=await r.json().catch(()=>({}));
+   if(r.status===401||(r.status===500&&d.error&&/API_KEY/.test(d.error)))throw new Error(d.error);
+   if(r.ok||![429,500,502,503,504].includes(r.status))break}catch(e){if(e&&/Access code|API_KEY/.test(e.message))throw e}
+  await new Promise(z=>setTimeout(z,800))}
+ if(d.image)return d.image;
+ if(images&&images.length)throw new Error(T('Image editing is not available on your current Gemini key.','আপনার বর্তমান Gemini কী-তে ছবি এডিট চালু নেই।'));
+ const wait=45000-(Date.now()-(+ls.get('nexa_lastfree')||0));
+ if(wait>0)throw new Error(T('Free image limit: please wait '+Math.ceil(wait/1000)+' seconds and try again.','ফ্রি ছবির সীমা: '+Math.ceil(wait/1000)+' সেকেন্ড অপেক্ষা করে আবার চেষ্টা করুন।'));
+ ls.set('nexa_lastfree',String(Date.now()));
+ const p=d.fallback?d.prompt:prompt;
+ for(let i=0;i<2;i++){try{return await pollinate(p)}catch(e){}}
+ throw new Error(T('Could not create the image. Please try again.','ছবি বানানো যায়নি। আবার চেষ্টা করুন।'))}
+function showGen(b,src,prompt){
+ b.innerHTML='';const im=new Image();im.className='gimg';im.alt=prompt;im.src=src;b.append(im);
+ actions(b.parentNode,{img:src})}
+
+// ---- Read the streamed reply: words appear while Nexan is still writing ----
+async function readStream(r,b){
+ const rd=r.body.getReader(),dec=new TextDecoder(),m=$('#msgs');let acc='',last=0,q=0,stall=0;
+ const paint=()=>{q=0;last=Date.now();b.innerHTML=md(acc);if(m.scrollHeight-m.scrollTop-m.clientHeight<200)m.scrollTop=1e9};
+ const arm=()=>{clearTimeout(stall);stall=setTimeout(()=>rd.cancel().catch(()=>{}),30000)};
+ arm();
+ try{for(;;){const{done,value}=await rd.read();if(done)break;arm();acc+=dec.decode(value,{stream:true});
+  if(acc.trim()){stopThink();if(!q)q=setTimeout(()=>requestAnimationFrame(paint),Math.max(0,50-(Date.now()-last)))}}}catch(e){if(!acc.trim())throw e}
+ clearTimeout(stall);clearTimeout(q);q=0;
+ acc+=dec.decode();
+ if(!acc.trim())throw new Error('Empty reply, please try again · খালি উত্তর, আবার চেষ্টা করুন');
+ stopThink();b.innerHTML=md(acc);copyBtn(b.parentNode,acc);m.scrollTop=1e9;return acc}
+// no answer headers within 50 s -> stop waiting (the stream itself is not cut)
+async function chatFetch(o){const ac=new AbortController(),tm=setTimeout(()=>ac.abort(),50000);
+ try{return await nfetch('/api/chat',{...o,signal:ac.signal})}finally{clearTimeout(tm)}}
+
+// ---- Send ----
+async function send(){
+ let txt=$('#in').value.trim();const im=pend.slice(),auto=!txt;
+ if((auto&&!im.length)||busy)return;
+ if(needLogin())return;
+ const ip=im.filter(x=>!x.file),fp=im.filter(x=>x.file);
+ const edit=genMode&&!auto&&ip.length>0&&!fp.length;
+ const gen=!auto&&(edit||(!im.length&&(genMode||isGen(txt))));
+ if(auto){const m=fp.length?fp[0].mime:'';
+  txt=!fp.length?'Please look at this image and help me. / এই ছবিটা দেখে সাহায্য করো।'
+   :m.startsWith('audio/')?'Listen to this audio. If it is a voice message, reply to it; otherwise transcribe and summarize it. / অডিওটা শুনে উত্তর দাও।'
+   :m.startsWith('video/')?'Watch this video, describe it and summarize it. / ভিডিওটা দেখে সারাংশ বলো।'
+   :'Read this file and give a clear summary. / ফাইলটা পড়ে সারাংশ দাও।'}
+ busy=true;$('#go').disabled=true;$('#in').value='';pend=[];strip();grow();upd();$('#wel').style.display='none';setGen(false);
+ const fl=fp.map(x=>({name:x.name,mime:x.mime,data:x.data}));
+ cur.msgs.push({role:'user',content:txt,imgs:ip.map(x=>x.url),files:fl});
+ if(cur.msgs.length===1)cur.title=auto?(fp.length?fico(fp[0].mime)+' '+fp[0].name.slice(0,30):'Image · ছবি'):txt.slice(0,40);
+ add('user',auto?'':txt,0,ip.map(x=>x.url),fl);const b=add('assistant','',1);let done=null;stopSpeak();
+ try{
+  if(gen){
+   const pr=gprompt(txt);
+   b.innerHTML='<div class="gsk">Creating your image…<br>ছবি তৈরি হচ্ছে…</div>';
+   const src=await makeImage(pr,edit?ip.map(x=>({mime:'image/jpeg',data:x.url.split(',')[1]})):null);stopThink();showGen(b,src,pr);
+   cur.msgs.push({role:'assistant',content:pr,gen:src});done='';
+  }else{
+   const li=cur.msgs.map(m=>(m.imgs&&m.imgs.length)||(m.files&&m.files.length)?1:0).lastIndexOf(1);
+   const payload=cur.msgs.map((m,i)=>({role:m.role,content:m.content,images:i===li?[...(m.imgs||[]).map(u=>({mime:'image/jpeg',data:u.split(',')[1]})),...(m.files||[]).map(f=>({mime:f.mime,data:f.data}))]:[]}));
+   let r,d={};
+   for(let i=0;i<3;i++){
+    r=await chatFetch({method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:payload,search:wsMode,code:cxMode,voice:!!VC,context:(await KBP,ctx(txt)),project:(pr=>pr?{name:pr.name,text:pr.text}:null)(projs.find(p=>p.id===cur.pid))})});
+    if(r.ok)break;
+    d=await r.json().catch(()=>({}));
+    if(![429,500,502,503,504].includes(r.status))break;
+    await new Promise(z=>setTimeout(z,1200));
+   }
+   if(!r.ok)throw new Error(d.error||'Server busy, please retry · সার্ভার ব্যস্ত, আবার পাঠান ('+r.status+')');
+   const reply=await readStream(r,b);cur.msgs.push({role:'assistant',content:reply});done=reply;
+  }
+ }catch(e){stopThink();
+  const net=e instanceof TypeError||/Failed to fetch|NetworkError|Load failed/i.test(e.message||'');
+  b.textContent=(e&&e.name==='AbortError')?T('Reply took too long. Please try again.','উত্তর আসতে দেরি হচ্ছে। আবার চেষ্টা করুন।'):(net?(/^https?:/.test(location.protocol)?T('Network problem. Check your internet and try again.','নেটওয়ার্ক সমস্যা। ইন্টারনেট দেখে আবার চেষ্টা করুন।'):T('Open your site link (https://…pages.dev), not the downloaded file.','ডাউনলোড করা ফাইল নয়, আপনার সাইটের লিংক (https://…pages.dev) খুলুন।')):e.message);b.classList.add('err')}
+ cur.t=Date.now();save();side();busy=false;$('#go').disabled=false;if(!VC)$('#in').focus();
+ if(done&&arMode&&!VC){const sb=b.parentNode.querySelector('.spk');speakText(done,null,sb)}
+ if(VC)vcNext(done);
+}
+function grow(){const t=$('#in');t.style.height='auto';t.style.height=Math.min(t.scrollHeight,160)+'px'}
+function upd(){$('#f').classList.toggle('ready',!!($('#in').value.trim()||pend.length))}
+$('#f').onsubmit=e=>{e.preventDefault();send()};
+$('#in').oninput=()=>{grow();upd()};
+$('#in').onkeydown=e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send()}};
+$('#new').onclick=fresh;$('#nb').onclick=fresh;
+$('#menu').onclick=()=>$('#side').classList.toggle('open');
+const closeSide=()=>$('#side').classList.remove('open');
+$('#sx').onclick=closeSide;$('#ov').onclick=closeSide;
+addEventListener('keydown',e=>{if(e.key==='Escape'){if(VC)vEnd();else closeSide()}});
+{let x0=null;const sd=$('#side');
+ sd.addEventListener('touchstart',e=>{x0=e.touches[0].clientX},{passive:true});
+ sd.addEventListener('touchend',e=>{if(x0!==null&&e.changedTouches[0].clientX-x0<-60)closeSide();x0=null},{passive:true})}
+
+function holder(){$('#in').placeholder='Ask anything'}
+
+// ---- Voice: read aloud + hands-free conversation (free browser voices) ----
+const SYN=window.speechSynthesis||null,SR=window.SpeechRecognition||window.webkitSpeechRecognition||null;
+if(!SR)document.body.classList.add('nosr');
+if(!SYN)$('#ar').style.display='none';
+let VOICES=[];const loadV=()=>{try{VOICES=SYN.getVoices()||[]}catch(e){}};
+if(SYN){loadV();SYN.onvoiceschanged=loadV}
+const isBn=t=>{const b=(t.match(/[\u0980-\u09FF]/g)||[]).length,l=(t.match(/\p{L}/gu)||[]).length;return l>0&&b/l>.3};
+function pickVoice(lang){const L=lang.toLowerCase(),p=L.slice(0,2);
+ return VOICES.find(v=>v.lang.replace('_','-').toLowerCase()===L)||VOICES.find(v=>v.lang.toLowerCase().startsWith(p))||null}
+function speakable(t){return t.replace(/\n\nSources:[\s\S]*$/,'').replace(/```[\s\S]*?```/g,' ').replace(/`([^`]*)`/g,'$1').replace(/https?:\/\/\S+/g,' ')
+ .replace(/^#{1,6}\s*/gm,'').replace(/^\s*[-*•]\s+/gm,'').replace(/[*_#>|~]/g,'').replace(/\s+/g,' ').trim()}
+function chunksOf(t){const parts=t.match(/[^।.!?\n]+[।.!?]*\s*/g)||[t],out=[];let c='';
+ for(const p of parts){if((c+p).length>170&&c){out.push(c);c=p}else c+=p}if(c.trim())out.push(c);return out}
+let spk=0,spkBtn=null;
+function spkUI(btn){if(spkBtn){spkBtn.innerHTML=IC.spk;spkBtn.classList.remove('on')}spkBtn=btn||null;if(spkBtn){spkBtn.innerHTML=IC.stop;spkBtn.classList.add('on')}}
+function stopSpeak(){spk++;try{SYN&&SYN.cancel()}catch(e){}spkUI(null)}
+function speakText(text,done,btn){
+ if(!SYN){done&&done();return}
+ stopSpeak();const id=spk;spkUI(btn);
+ const ch=chunksOf(speakable(text));let i=0;
+ const fin=()=>{if(id!==spk)return;spkUI(null);done&&done()};
+ const next=()=>{if(id!==spk)return;if(i>=ch.length)return fin();
+  const t=ch[i++];if(!/[\p{L}\p{N}]/u.test(t))return next();
+  const u=new SpeechSynthesisUtterance(t),bn=isBn(t),lang=bn?'bn-BD':'en-US',v=pickVoice(lang)||(bn?pickVoice('bn-IN'):null);
+  if(v){u.voice=v;u.lang=v.lang}else u.lang=lang;
+  if(bn&&!v&&!ls.get('nx_bnhint')){ls.set('nx_bnhint','1');toast(T('No Bangla voice found. Install it: Phone Settings > Text-to-speech > Google > Bangla.','বাংলা ভয়েস পাওয়া যায়নি। ফোনের Settings > Text-to-speech > Google > বাংলা ডাউনলোড করুন।'))}
+  u.rate=1.02;u.onend=next;u.onerror=()=>{if(id===spk)next()};
+  try{SYN.speak(u)}catch(e){fin()}};
+ next()}
+// auto-read chip
+let arMode=ls.get('nx_ar')==='1';
+function setAr(v){arMode=v;ls.set('nx_ar',v?'1':'');$('#ar').classList.toggle('on',v);$('#ar').setAttribute('aria-pressed',v)}
+setAr(arMode);
+$('#ar').onclick=()=>{setAr(!arMode);if(!arMode)stopSpeak();else toast(T('Replies will be read aloud.','উত্তর পড়ে শোনানো হবে।'))};
+
+// Microphone gate: asks the browser for "Allow" (only possible on an https page) and explains clearly when it cannot
+async function micGate(){
+ if(!/^https?:$/.test(location.protocol)||!window.isSecureContext||!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){
+  toast(T('The microphone works only on your https site link, not on a downloaded file. Open https://…pages.dev','মাইক্রোফোন শুধু https সাইট লিংকে চলে, ডাউনলোড করা ফাইলে নয়। https://…pages.dev লিংকে খুলুন।'));return false}
+ try{const q=await navigator.permissions.query({name:'microphone'});
+  if(q.state==='denied'){toast(T('Microphone is blocked. Tap the icon left of the address bar > Permissions > Microphone > Allow.','মাইক্রোফোন ব্লক করা আছে। ঠিকানার বাঁ পাশের আইকন > Permissions > Microphone > Allow করুন।'));return false}}catch(e){}
+ try{const st=await navigator.mediaDevices.getUserMedia({audio:true});st.getTracks().forEach(t=>t.stop());return true}
+ catch(e){toast(T('Microphone was not allowed. Tap the mic again and choose Allow.','মাইক্রোফোন Allow করা হয়নি। আবার চাপুন এবং Allow বেছে নিন।'));return false}}
+
+// ---- Hands-free voice conversation: listen -> send -> speak -> listen ----
+let VC=null;const vo=$('#vo');
+const VS={l:T('Listening…','শুনছি…'),t:T('Thinking…','ভাবছে…'),s:T('Speaking… tap to interrupt','বলছে… থামাতে চাপুন')};
+function vState(st){vo.className='on '+st;$('#vs').textContent=VS[st]}
+async function vStart(){
+ if(VC||!SR)return;
+ if(needLogin())return;
+ if(busy){toast(T('Please wait for the reply.','উত্তর শেষ হওয়া পর্যন্ত অপেক্ষা করুন।'));return}
+ if(!await micGate())return;
+ VC={lang:ls.get('nx_vl')||'bn-BD',tries:0,err:0,rec:null,wl:null};
+ $('#vl').textContent=VC.lang==='bn-BD'?'বাংলা':'English';$('#vtx').textContent='';
+ $('#wel').style.display='none';
+ try{if(navigator.wakeLock)VC.wl=await navigator.wakeLock.request('screen')}catch(e){}
+ vListen()}
+function vEnd(){const v=VC;VC=null;if(!v)return;
+ try{if(v.rec){v.rec.onend=null;v.rec.onerror=null;v.rec.abort()}}catch(e){}
+ try{v.wl&&v.wl.release()}catch(e){}
+ stopSpeak();vo.className='';if(cur&&!cur.msgs.length)$('#wel').style.display=''}
+function vListen(){
+ if(!VC)return;const v=VC;let fin='';
+ const rec=new SR();v.rec=rec;rec.lang=v.lang;rec.interimResults=true;rec.continuous=false;rec.maxAlternatives=1;
+ vState('l');$('#vtx').textContent='';
+ rec.onresult=e=>{let it='';for(let i=e.resultIndex;i<e.results.length;i++){const r=e.results[i];if(r.isFinal)fin+=r[0].transcript;else it+=r[0].transcript}
+  $('#vtx').textContent=(fin+it).trim()};
+ rec.onerror=e=>{if(VC!==v)return;
+  if(e.error==='not-allowed'||e.error==='service-not-allowed'){toast(T('Please allow the microphone.','মাইক্রোফোনের অনুমতি দিন।'));vEnd()}
+  else if(e.error==='network'){toast(T('Voice needs internet.','ভয়েসের জন্য ইন্টারনেট লাগবে।'));vEnd()}
+  else if(e.error==='language-not-supported'){toast(T('This language is not supported for voice on your device.','এই ভাষার ভয়েস আপনার ডিভাইসে চলে না।'));vEnd()}};
+ rec.onend=()=>{if(VC!==v)return;const t=fin.trim();
+  if(t){v.tries=0;vState('t');$('#in').value=t;send();return}
+  if(++v.tries>=4){toast(T('No voice heard. Voice mode ended.','কোনো কথা শোনা যায়নি। ভয়েস মোড শেষ।'));vEnd();return}
+  setTimeout(vListen,250)};
+ try{rec.start()}catch(e){setTimeout(vListen,400)}}
+function vcNext(reply){
+ if(!VC)return;
+ if(reply===null){if(++VC.err>=2){toast(T('Voice mode stopped because of an error.','ত্রুটির কারণে ভয়েস মোড বন্ধ হয়েছে।'));vEnd();return}vListen();return}
+ VC.err=0;
+ if(reply){vState('s');speakText(reply,()=>{if(VC)vListen()})}else vListen()}
+$('#vc').onclick=vStart;$('#ve').onclick=vEnd;
+$('#vb').onclick=()=>{if(VC&&vo.classList.contains('s')){stopSpeak();vListen()}};
+$('#vl').onclick=()=>{if(!VC)return;VC.lang=VC.lang==='bn-BD'?'en-US':'bn-BD';ls.set('nx_vl',VC.lang);$('#vl').textContent=VC.lang==='bn-BD'?'বাংলা':'English';
+ if(vo.classList.contains('l')){try{VC.rec.onend=null;VC.rec.abort()}catch(e){}vListen()}};
+
+// ---- Teach Nexan (your own knowledge, saved in this browser) ----
+let tkeys=[];
+function chipsR(){const c=$('#chips');c.innerHTML='';tkeys.forEach((k,i)=>{const s=document.createElement('span');s.className='chip';s.textContent=k;
+ const x=document.createElement('button');x.type='button';x.textContent='✕';x.onclick=()=>{tkeys.splice(i,1);chipsR()};s.append(x);c.append(s)})}
+function addKey(){$('#tk').value.split(/[,،]/).map(x=>x.trim()).filter(Boolean).forEach(k=>{if(!tkeys.includes(k))tkeys.push(k)});$('#tk').value='';chipsR()}
+$('#tk').onkeydown=e=>{if(e.key==='Enter'||e.key===','||e.key==='،'){e.preventDefault();addKey()}
+ else if(e.key==='Backspace'&&!$('#tk').value&&tkeys.length){tkeys.pop();chipsR()}};
+$('#tk').onblur=addKey;$('#cb').onclick=()=>$('#tk').focus();
+const msg=(t,bad)=>{const m=$('#tmsg');m.textContent=t||'';m.style.color=bad?'#FF8A9A':'#8FB8FF'};
+function lockUI(){const on=!!PW||LOC;$('#pwrow').style.display=on?'none':'';$('#tform').style.display=on?'flex':'none';$('#lock').style.display=PW?'':'none'}
+async function api(body){const r=await fetch('/api/kb',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...body,password:PW})});
+ return{r,d:await r.json().catch(()=>({}))}}
+function wrong(){PW='';ls.set('nx_pw','');lockUI();msg('Wrong password · ভুল পাসওয়ার্ড',1)}
+function teachList(){const l=$('#tl'),u=KB.filter(k=>k.u);$('#cnt').textContent=u.length;l.innerHTML='';
+ u.slice().reverse().forEach(k=>{const d=document.createElement('div');d.className='te';const b=document.createElement('div');b.className='tb2';
+  const ks=document.createElement('div');ks.className='tks';k.keys.forEach(q=>{const c=document.createElement('span');c.className='chip s';c.textContent=q;ks.append(c)});
+  if(!k.g){const v=document.createElement('span');v.className='dev';v.textContent='This device only · শুধু এই ডিভাইসে';ks.append(v)}
+  const p=document.createElement('div');p.className='tt';p.textContent=k.text;b.append(ks,p);
+  if(!k.g&&PW&&!LOC){const pb=document.createElement('button');pb.className='pub';pb.type='button';pb.textContent='Publish for everyone · সবার জন্য দিন';
+   pb.onclick=async()=>{pb.disabled=true;try{const{r,d}=await api({action:'add',keys:k.keys,text:k.text});
+     if(r.ok){KB=KB.filter(q=>q.id!==k.id);if(db)st('kb',1).delete(k.id);KB.push(d.entry);msg('Published ✓ · প্রকাশ হয়েছে ✓');teachList();return}
+     if(r.status===401)return wrong()}catch(e){}
+    pb.disabled=false;msg('Could not publish · প্রকাশ করা যায়নি',1)};b.append(pb)}
+  const x=document.createElement('button');x.textContent='✕';x.title='Delete · মুছুন';
+  x.onclick=async()=>{
+   if(k.g){if(!PW){msg('Unlock first · আগে আনলক করুন',1);return}
+    try{const{r}=await api({action:'delete',id:k.id});if(r.status===401)return wrong();if(!r.ok)throw 0}catch(e){msg('Could not delete · মোছা যায়নি',1);return}}
+   else if(db)st('kb',1).delete(k.id);
+   KB=KB.filter(q=>q.id!==k.id);teachList()};
+  d.append(b,x);l.append(d)});
+ if(!u.length)l.innerHTML='<div class="empty2">Nothing taught yet<br>এখনও কিছু শেখানো হয়নি</div>'}
+$('#tb').onclick=()=>{lockUI();teachList();$('#teach').showModal();$('#side').classList.remove('open')};
+$('#tc').onclick=()=>$('#teach').close();
+$('#teach').onclick=e=>{if(e.target===e.currentTarget)e.currentTarget.close()};
+$('#pw').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();$('#pwb').click()}};
+$('#pwb').onclick=async()=>{const v=$('#pw').value.trim();if(!v)return;PW=v;msg('Checking… · চেক হচ্ছে…');
+ try{const{r}=await api({action:'check'});
+  if(r.ok){ls.set('nx_pw',PW);LOC=false;$('#pw').value='';msg('');lockUI();teachList();return}
+  if(r.status===401)return wrong();
+  PW='';LOC=true;lockUI();msg('Server storage is not ready. Saving on this device only. · সার্ভার প্রস্তুত নয়, শুধু এই ডিভাইসে সেভ হবে।',1)
+ }catch(e){PW='';msg('Network problem, try again · নেটওয়ার্ক সমস্যা, আবার চেষ্টা করুন',1)}};
+$('#lock').onclick=()=>{PW='';LOC=false;ls.set('nx_pw','');lockUI();msg('')};
+$('#ts').onclick=async()=>{addKey();const t=$('#tt').value.trim();
+ if(!tkeys.length||!t){const c=$('#teach .card');c.classList.remove('shake');void c.offsetWidth;c.classList.add('shake');return}
+ const keys=tkeys.slice();let e=null,ok='';
+ if(!LOC){
+  try{const{r,d}=await api({action:'add',keys,text:t});
+   if(r.ok){e=d.entry;ok='Saved for everyone ✓ · সবার জন্য সেভ হয়েছে ✓'}
+   else if(r.status===401)return wrong();
+   else throw 0
+  }catch(x){msg('Server not reachable. Saved on this device only. · সার্ভারে সেভ হয়নি, শুধু এই ডিভাইসে সেভ হয়েছে।',1)}}
+ if(!e){e={id:'u_'+uid(),u:1,keys,text:t};if(db)st('kb',1).put(e)}
+ KB.push(e);tkeys=[];chipsR();$('#tt').value='';teachList();if(ok)msg(ok)};
+// ---- Projects (a topic + instructions; chats inside stay on that topic; saved in this browser) ----
+const pst=()=>db&&st('projects',1);
+function welcome(){const pr=projs.find(p=>p.id===curProj),w=$('#wel h1'),p=$('#wel p');
+ if(!pr){w.innerHTML='How can I help you today?<small>আজ কীভাবে সাহায্য করতে পারি?</small>';p.innerHTML='Ask anything or upload a screenshot<br>যেকোনো কিছু জিজ্ঞাসা করুন বা স্ক্রিনশট দিন';return}
+ w.textContent=pr.name;const s=document.createElement('small');s.textContent='Ask anything about this project · এই প্রজেক্ট নিয়ে জিজ্ঞাসা করুন';w.append(s);
+ p.textContent=pr.text.slice(0,140)+(pr.text.length>140?'…':'')}
+function projUI(){const pr=projs.find(p=>p.id===curProj),b=$('#pj');
+ $('#sec').textContent=pr?'Project chats · প্রজেক্টের চ্যাট':'Recent · সাম্প্রতিক';
+ $('#bt').textContent=pr?'Nexan Ai · '+pr.name:'Nexan Ai';
+ b.style.display=pr?'':'none';b.innerHTML='';
+ if(pr){const n=document.createElement('b');n.textContent=pr.name;const x=document.createElement('button');x.type='button';x.textContent='✕ Exit · বের হন';x.onclick=()=>{curProj=null;fresh()};b.append(n,x)}
+ welcome()}
+function resetPF(){editP=null;$('#pn').value='';$('#pt').value='';$('#ps').textContent='Create project · প্রজেক্ট বানান';$('#pcx').style.display='none'}
+function openProj(id){curProj=id;$('#proj').close();fresh()}
+function delProj(p){if(!confirm('Delete project "'+p.name+'" and its chats?\nপ্রজেক্ট "'+p.name+'" ও এর সব চ্যাট মুছবেন?'))return;
+ chats.filter(c=>c.pid===p.id).forEach(c=>{if(db)st('chats',1).delete(c.id)});chats=chats.filter(c=>c.pid!==p.id);
+ projs=projs.filter(q=>q.id!==p.id);if(pst())pst().delete(p.id);
+ if(curProj===p.id){curProj=null;fresh()}else side();projList()}
+function projList(){const l=$('#pl');l.innerHTML='';$('#pcnt').textContent=projs.length;
+ projs.slice().reverse().forEach(p=>{const d=document.createElement('div');d.className='te';d.style.cursor='pointer';
+  const b=document.createElement('div');b.className='tb2';
+  const t=document.createElement('div');t.className='tt';t.style.fontWeight='600';t.textContent=p.name;
+  const n=chats.filter(c=>c.pid===p.id).length,s=document.createElement('div');s.className='tt';s.style.cssText='color:var(--mut);font-size:13px';
+  s.textContent=p.text.slice(0,110)+(p.text.length>110?'…':'')+' · '+n+' chats · চ্যাট';b.append(t,s);
+  const e=document.createElement('button');e.className='ed';e.type='button';e.textContent='✎';e.title='Edit · সম্পাদনা';
+  e.onclick=ev=>{ev.stopPropagation();editP=p.id;$('#pn').value=p.name;$('#pt').value=p.text;$('#ps').textContent='Update · আপডেট করুন';$('#pcx').style.display='';$('#pn').focus()};
+  const x=document.createElement('button');x.type='button';x.textContent='✕';x.title='Delete · মুছুন';x.onclick=ev=>{ev.stopPropagation();delProj(p)};
+  d.onclick=()=>openProj(p.id);d.append(b,e,x);l.append(d)});
+ if(!projs.length)l.innerHTML='<div class="empty2">No projects yet<br>এখনও কোনো প্রজেক্ট নেই</div>'}
+$('#pb').onclick=()=>{resetPF();projList();$('#proj').showModal();$('#side').classList.remove('open')};
+$('#pc').onclick=()=>$('#proj').close();
+$('#proj').onclick=e=>{if(e.target===e.currentTarget)e.currentTarget.close()};
+$('#pcx').onclick=resetPF;
+$('#ps').onclick=()=>{const n=$('#pn').value.trim().slice(0,60),t=$('#pt').value.trim().slice(0,3000);
+ if(!n||!t){const c=$('#proj .card');c.classList.remove('shake');void c.offsetWidth;c.classList.add('shake');return}
+ if(editP){const p=projs.find(q=>q.id===editP);p.name=n;p.text=t;if(pst())pst().put(p);resetPF();projList();projUI();return}
+ const p={id:'p_'+uid(),name:n,text:t,t:Date.now()};projs.push(p);if(pst())pst().put(p);resetPF();openProj(p.id)};
+console.log("%cNexan Ai · By Ruhul","color:#2F6BFF;font-size:14px;font-weight:bold");
+
+// ---- Accounts, profile and dashboard (v9) ----
+(()=>{
+const AU=window.AU={user:null,m:'login',on:false,g:false,ready:false};
+async function ax(p,b){if(!/^https?:$/.test(location.protocol))throw new Error(T('Open the website link (https://...), not the downloaded file','ডাউনলোড করা ফাইল নয়, সাইটের https লিংকে খুলুন'));try{const r=await fetch('/api/auth/'+p,{method:b?'POST':'GET',headers:b?{'Content-Type':'application/json'}:{},body:b?JSON.stringify(b):undefined,credentials:'same-origin'});
+ const d=await r.json().catch(()=>({}));if(!r.ok)throw new Error(d.error||T('Something went wrong','কিছু ভুল হয়েছে'));return d}
+ catch(e){throw e instanceof TypeError?new Error(T('Network error, check your connection','নেটওয়ার্ক সমস্যা, সংযোগ দেখুন')):e}}
+const NAME=/^[\p{L}\p{N}_. -]{3,24}$/u,MAIL=/^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+function avatar(el,u){el.textContent='';if(u.avatar){const i=new Image();i.referrerPolicy='no-referrer';i.src=u.avatar;i.alt='';el.append(i)}else el.textContent=(u.username||'?')[0].toUpperCase()}
+function tp(){const b=$('#tp');if(!b)return;b.hidden=AU.ready&&!AU.on&&!AU.user;b.textContent='';if(AU.user){const s=document.createElement('span');s.className='av2';avatar(s,{username:AU.user.name||AU.user.username,avatar:AU.user.avatar});b.append(s);b.setAttribute('aria-label','Profile · প্রোফাইল')}else{b.innerHTML='<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>';b.setAttribute('aria-label','Sign in · সাইন ইন')}}
+function acc(){tp();const b=$('#acc');b.hidden=!AU.user;$('#gsi').hidden=!!AU.user||(AU.ready&&!AU.on);$('#pmenu').hidden=true;if(AU.user){const n=AU.user.name||AU.user.username;b.querySelector('.pt b').textContent=n;avatar(b.querySelector('.av2'),{username:n,avatar:AU.user.avatar})}}
+const EYE=`<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>`,EYEOFF=`<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l18 18M10.6 5.1A10 10 0 0 1 12 5c6.4 0 10 7 10 7a17 17 0 0 1-3.2 4M6.5 6.6C3.7 8.4 2 12 2 12s3.6 7 10 7c1.7 0 3.2-.4 4.5-1M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg>`;
+const NB=$('#nxb');
+const FM={login:['lid','lpw','ler'],signup:['run','rem','rpw','rer'],forgot:['fem','fer']};
+function bad(m,f,k){const E={login:'ler',signup:'rer',forgot:'fer'};Object.values(E).forEach(i=>{const e=$('#'+i);e.textContent=''});
+ Object.values(FM).flat().forEach(i=>{const x=$('#'+i);if(x&&x.tagName==='INPUT')x.removeAttribute('aria-invalid')});
+ if(m){$('#'+E[k||AU.m]).textContent=m;NB.classList.remove('sh');void NB.offsetWidth;NB.classList.add('sh');if(f){const x=$('#'+f);x.setAttribute('aria-invalid','true');x.focus()}}}
+function mode(m){if(AU.m!==m)NB.classList.add('go');AU.m=m;NB.classList.toggle('active',m==='signup');NB.classList.toggle('rec',m==='forgot');
+ [['.fb.login',m==='login'],['.fb.register',m==='signup'],['.fb.recover',m==='forgot'],['.info.login',m!=='signup'],['.info.register',m==='signup']].forEach(([s,on])=>{const e=NB.querySelector(s);if(on)e.removeAttribute('inert');else e.setAttribute('inert','')});
+ bad('')}
+function fit(){const w=$('#nxw');if(window.innerWidth<=640){w.style.width='';w.style.height='';NB.style.transform='';return}const s=Math.min(1,(window.innerWidth-24)/750);w.style.width=750*s+'px';w.style.height=450*s+'px';NB.style.transform='scale('+s+')'}
+window.addEventListener('resize',fit);fit();
+window.showAu=m=>{$('#dash').hidden=true;$('#au').hidden=false;mode(m||'login');fit()};
+const PKEY='nx_pending';
+window.needLogin=()=>{if(AU.user)return false;if(!AU.ready){toast(T('Checking your account, try again in a moment','অ্যাকাউন্ট যাচাই হচ্ছে, একটু পরে চেষ্টা করুন'));return true}if(!AU.on)return false;try{if(VC)vEnd()}catch(e){}showAu('login');return true};
+function closeAu(){$('#au').hidden=true;try{sessionStorage.removeItem(PKEY)}catch(e){}bad('')}
+function takePending(){let p='';try{p=sessionStorage.getItem(PKEY)||'';sessionStorage.removeItem(PKEY)}catch(e){}return p}
+function restoreMsg(){const p=takePending(),i=$('#in');if(p&&!i.value)i.value=p;grow();upd();if(i.value.trim()){i.focus();toast(T('Signed in. Your message is ready, review it and press Send.','সাইন ইন হয়েছে। আপনার মেসেজ তৈরি আছে, দেখে Send চাপুন।'))}}
+async function enter(u){AU.user=u;if(u.prefs&&u.prefs.theme){PREF={...PREF,...u.prefs};try{localStorage.setItem('nx_pref',JSON.stringify(PREF))}catch(e){}applyTheme();applyLang()}$('#au').hidden=true;['lpw','rpw'].forEach(i=>$('#'+i).value='');acc();await init();restoreMsg()}
+$('#tp').onclick=()=>{if(AU.user)openDash('profile');else showAu('login')};
+$('#tosu').onclick=e=>{e.preventDefault();mode('signup')};$('#tosi').onclick=e=>{e.preventDefault();mode('login')};
+$('#afg').onclick=()=>{$('#fem').value=$('#lid').value.includes('@')?$('#lid').value:'';mode('forgot')};$('#tobk').onclick=e=>{e.preventDefault();mode('login')};
+document.querySelectorAll('.nxeye').forEach(b=>b.onclick=()=>{const p=$('#'+b.dataset.for),s=p.type==='password';p.type=s?'text':'password';b.setAttribute('aria-pressed',String(s));b.setAttribute('aria-label',s?'Hide password':'Show password');b.innerHTML=s?EYEOFF:EYE;p.focus()});
+document.querySelectorAll('.nxbtn').forEach(b=>b.addEventListener('pointerdown',e=>{const r=b.getBoundingClientRect(),s=Math.max(r.width,r.height)*2*(750/ (NB.getBoundingClientRect().width||750)||1),k=document.createElement('span'),sc=NB.getBoundingClientRect().width/ (window.innerWidth<=640?NB.offsetWidth:750)||1;k.className='rp';const d=Math.max(r.width,r.height)*2/sc;k.style.cssText='width:'+d+'px;height:'+d+'px;left:'+((e.clientX-r.left)/sc-d/2)+'px;top:'+((e.clientY-r.top)/sc-d/2)+'px';b.append(k);setTimeout(()=>k.remove(),650)}));
+async function send(btn,fn){if(btn.disabled)return;btn.disabled=true;btn.classList.add('ld');try{await fn()}catch(x){bad(x.message)}finally{btn.disabled=false;btn.classList.remove('ld')}}
+const GERR={not_configured:['Google sign-in is not set up on this site yet. Please tell the site admin.','এই সাইটে Google সাইন-ইন এখনো চালু হয়নি। অ্যাডমিনকে জানান।'],cancelled:['Google sign-in was cancelled.','Google সাইন-ইন বাতিল করা হয়েছে।'],state:['The sign-in session expired. Please try again.','সাইন-ইন সেশন শেষ হয়ে গেছে। আবার চেষ্টা করুন।'],failed:['Google sign-in failed. Please try again.','Google সাইন-ইন হয়নি। আবার চেষ্টা করুন।'],unverified:['Your Google email is not verified.','আপনার Google ইমেইল ভেরিফাইড নয়।'],exists:['An account with this email already exists. Log in with your password, then connect Google in Account settings.','এই ইমেইলে আগে থেকেই অ্যাকাউন্ট আছে। পাসওয়ার্ড দিয়ে লগইন করে Account settings থেকে Google যুক্ত করুন।'],taken:['This Google account is already linked to another user.','এই Google অ্যাকাউন্ট অন্য ব্যবহারকারীর সাথে যুক্ত।'],login_first:['Please log in first.','আগে লগইন করুন।'],busy:['Too many attempts, wait a minute.','অনেকবার চেষ্টা হয়েছে, এক মিনিট অপেক্ষা করুন।']};
+function gstart(btn,rem){if(btn.disabled)return;
+ if(!AU.g){bad(T(...GERR.not_configured));return}
+ try{const v=$('#in').value;if(v.trim())sessionStorage.setItem(PKEY,v);else sessionStorage.removeItem(PKEY)}catch(e){}
+ bad('');btn.disabled=true;btn.classList.add('ld');location.href='/api/auth/google/start?rem='+(rem?1:0)}
+$('#glg').onclick=()=>gstart($('#glg'),$('#arm').checked);$('#grg').onclick=()=>gstart($('#grg'),true);
+$('#auc').onclick=closeAu;$('#gsi').onclick=()=>showAu('login');
+addEventListener('pageshow',e=>{if(e.persisted)['glg','grg'].forEach(i=>{const b=$('#'+i);b.disabled=false;b.classList.remove('ld')})});
+function authReturn(){const q=new URLSearchParams(location.search),e=q.get('auth_error'),ok=q.get('auth');if(!e&&!ok)return;history.replaceState(null,'',location.pathname);
+ if(e){showAu('login');bad(T(...(GERR[e]||GERR.failed)))}
+ else if(ok==='linked'){toast(T('Google account connected','Google অ্যাকাউন্ট যুক্ত হয়েছে'));if(AU.user)openDash('settings')}}
+$('#lf').onsubmit=e=>{e.preventDefault();const id=$('#lid').value.trim(),pw=$('#lpw').value;
+ if(!id)return bad(T('Enter your username or email','ইউজারনেম বা ইমেইল দিন'),'lid');
+ if(id.includes('@')&&!MAIL.test(id))return bad(T('Enter a valid email address','সঠিক ইমেইল ঠিকানা দিন'),'lid');
+ if(!pw)return bad(T('Enter your password','পাসওয়ার্ড দিন'),'lpw');bad('');
+ send($('#lbtn'),async()=>{const d=await ax('login',{login:id,email:id,password:pw,remember:$('#arm').checked});await enter(d.user);toast(T('Welcome, ','স্বাগতম, ')+d.user.username)})};
+$('#rf').onsubmit=e=>{e.preventDefault();const un=$('#run').value.trim(),em=$('#rem').value.trim(),pw=$('#rpw').value;
+ if(!NAME.test(un))return bad(T('Username: 3-24 letters or numbers','ইউজারনেম: ৩-২৪ অক্ষর বা সংখ্যা'),'run');
+ if(!MAIL.test(em))return bad(T('Enter a valid email address','সঠিক ইমেইল ঠিকানা দিন'),'rem');
+ if(pw.length<8)return bad(T('Password needs at least 8 characters','পাসওয়ার্ড কমপক্ষে ৮ অক্ষর'),'rpw');bad('');
+ send($('#rbtn'),async()=>{const d=await ax('signup',{email:em,username:un,password:pw,remember:true});await enter(d.user);toast(T('Welcome, ','স্বাগতম, ')+d.user.username)})};
+// Placeholder: the server answers 501 until password-reset email is connected (see worker.js); the honest message is shown.
+$('#ff').onsubmit=e=>{e.preventDefault();const em=$('#fem').value.trim();
+ if(!MAIL.test(em))return bad(T('Enter a valid email address','সঠিক ইমেইল ঠিকানা দিন'),'fem');bad('');
+ send($('#fbtn'),async()=>{await ax('forgot',{id:em});const r=$('#fer');r.style.color='#6EE7A8';r.textContent=T('If this email exists, a reset link was sent.','ইমেইলটি থাকলে রিসেট লিংক পাঠানো হয়েছে।')})};
+// dashboard
+const V=['home','Home · হোম','profile','Profile · প্রোফাইল','settings','Account · অ্যাকাউন্ট','personal','Personalize · পছন্দ','tools','AI Tools · টুলস','help','Help · সাহায্য'];
+const el=(h)=>{const d=document.createElement('div');d.innerHTML=h;return d};
+function say(n,m,good){const e=$(n);e.className='aer'+(good?' ok2':'');e.textContent=m}
+function close(){$('#dash').hidden=true}
+function go(k){const n=$('#dnav');n.innerHTML='';for(let i=0;i<V.length;i+=2){const b=document.createElement('button');b.textContent=V[i+1];b.className=V[i]===k?'on':'';b.onclick=()=>go(V[i]);n.append(b)}
+ const x=document.createElement('button');x.id='dx';x.textContent='✕';x.setAttribute('aria-label','Close');x.onclick=close;n.append(x);
+ const v=$('#dv');v.innerHTML='';const u=AU.user||{username:'',email:''};
+ if(k==='home'){v.append(el(`<h2 class="dh2"></h2><p>Your Nexan Ai workspace · আপনার Nexan Ai ওয়ার্কস্পেস</p><div class="grid">
+ <div class="dc"><b>${chats.length}</b><span>Chats · চ্যাট</span></div><div class="dc"><b>${projs.length}</b><span>Projects · প্রজেক্ট</span></div><div class="dc"><b>${KB.filter(k=>k.u).length}</b><span>Saved facts · তথ্য</span></div></div>
+ <div class="grid"><button class="dc" data-a="chat"><b>AI</b><span>AI Assistant · চ্যাট শুরু</span></button><button class="dc" data-a="hist"><b>↺</b><span>Chat History · পুরনো চ্যাট</span></button><button class="dc" data-a="tools"><b>✦</b><span>AI Tools · টুলস</span></button></div>`));
+  v.querySelector('h2').textContent=T('Hello, ','হ্যালো, ')+u.username;
+  const rc=chats.filter(c=>c.msgs&&c.msgs.length).slice(0,4);if(rc.length){const l=document.createElement('div');l.className='rl';const t=document.createElement('p');t.textContent=T('Recent conversations','সাম্প্রতিক কথোপকথন');v.append(t,l);
+   rc.forEach(c=>{const b=document.createElement('button');b.type='button';b.dataset.c=c.id;b.textContent=c.title||'Chat';l.append(b)})}}
+ if(k==='tools')v.append(el(`<h2 class="dh2">AI Tools · এআই টুলস</h2><p>Tap a tool to start · টুল চাপুন</p><div class="grid">
+ <button class="dc" data-t="img"><b>🖼</b><span>Create image · ছবি বানান</span></button><button class="dc" data-t="web"><b>🌐</b><span>Web search · ওয়েব সার্চ</span></button>
+ <button class="dc" data-t="file"><b>📄</b><span>Read PDF/file · ফাইল পড়ান</span></button><button class="dc" data-t="code"><b>{ }</b><span>Solve with code · কোড দিয়ে</span></button></div>`));
+ if(k==='profile'){v.append(el(`<h2 class="dh2">My Profile · আমার প্রোফাইল</h2>
+ <div class="prow"><div class="av2 lg" id="ppa"></div><div><input type="file" id="pph" accept="image/*" hidden><button type="button" class="abtn ghost" id="ppc" hidden style="width:auto;padding:9px 16px">Change photo · ছবি বদলান</button></div></div>
+ <label class="fl" for="ppf">Full name · পূর্ণ নাম</label><input id="ppf" maxlength="50" autocomplete="name" readonly>
+ <label class="fl" for="ppn">Username · ইউজারনেম</label><input id="ppn" maxlength="24" autocomplete="nickname" readonly>
+ <label class="fl" for="ppe">Email · ইমেইল</label><input id="ppe" readonly>
+ <p id="ppj"></p><div id="ppr" class="aer" role="alert"></div>
+ <div class="brow"><button type="button" class="abtn" id="ppd">Edit Profile · এডিট করুন</button><button type="button" class="abtn" id="pps" hidden>Save Changes · সেভ</button><button type="button" class="abtn ghost" id="ppx" hidden>Cancel · বাতিল</button></div>`));
+  let pic=u.avatar||'';const fill=()=>{$('#ppf').value=u.name||'';$('#ppn').value=u.username;$('#ppe').value=u.email;avatar($('#ppa'),{username:u.name||u.username,avatar:pic})};
+  const setEd=on=>{['ppf','ppn'].forEach(i=>$('#'+i).readOnly=!on);$('#ppc').hidden=!on;$('#pps').hidden=!on;$('#ppx').hidden=!on;$('#ppd').hidden=on;say('#ppr','')};
+  fill();$('#ppj').textContent=u.created?T('Joined','যোগ দিয়েছেন')+' '+new Date(u.created).toLocaleDateString():'';
+  $('#ppd').onclick=()=>{setEd(true);$('#ppf').focus()};$('#ppx').onclick=()=>{pic=u.avatar||'';fill();setEd(false)};
+  $('#ppc').onclick=()=>$('#pph').click();
+  $('#pph').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{pic=await shrink2(f);avatar($('#ppa'),{username:$('#ppf').value||$('#ppn').value,avatar:pic})}catch(x){say('#ppr',x.message)}};
+  $('#pps').onclick=async()=>{const nm=$('#ppf').value.trim(),n=$('#ppn').value.trim();
+   if(nm.length>50)return say('#ppr',T('Name is too long (max 50)','নাম বেশি বড় (সর্বোচ্চ ৫০)'));
+   if(!NAME.test(n))return say('#ppr',T('Username: 3-24 letters or numbers','ইউজারনেম: ৩-২৪ অক্ষর বা সংখ্যা'));
+   const b=$('#pps');b.disabled=true;b.classList.add('ld');
+   try{const d=await ax('profile',{name:nm,username:n,avatar:pic});AU.user=d.user;acc();toast(T('Profile saved','প্রোফাইল সেভ হয়েছে'));go('profile')}
+   catch(x){say('#ppr',T('Not saved','সেভ হয়নি')+': '+x.message)}finally{b.disabled=false;b.classList.remove('ld')}}}
+ if(k==='settings'){v.append(el(`<h2 class="dh2">Account Settings · অ্যাকাউন্ট সেটিংস</h2>
+ <span class="fl">Email · ইমেইল</span><div class="sbox"><b id="se"></b><span>Verification: not available yet, no email service is connected. · ভেরিফিকেশন চালু নেই, ইমেইল সার্ভিস সংযুক্ত নয়।</span></div>
+ <span class="fl">Google · গুগল</span><div class="sbox"><span id="sgs"></span><button type="button" class="abtn ghost" id="sgl" hidden>Connect Google · Google যুক্ত করুন</button></div>
+ <span class="fl" id="spl">Change password · পাসওয়ার্ড বদলান</span>
+ <input id="sc" type="password" placeholder="Current password · বর্তমান" autocomplete="current-password" maxlength="100"><input id="sn" type="password" placeholder="New password (8+) · নতুন" autocomplete="new-password" maxlength="100">
+ <div id="sr" class="aer" role="alert"></div><button class="abtn" id="sb2">Update password · আপডেট</button>
+ <span class="fl">Account preferences · পছন্দ</span><div class="sbox"><span id="spf"></span><button type="button" class="abtn ghost" id="sgp">Open Personalization · পছন্দ খুলুন</button></div>
+ <div style="height:18px"></div><button class="abtn ghost" id="lo">Sign Out · সাইন আউট</button><div style="height:10px"></div><button class="abtn red" id="dl">Delete account · অ্যাকাউন্ট মুছুন</button>`));
+  $('#se').textContent=u.email;$('#sgs').textContent=u.google?T('Connected to your Google account','Google অ্যাকাউন্ট যুক্ত আছে'):T('Not connected','যুক্ত নেই');if(!u.google&&AU.g){$('#sgl').hidden=false;$('#sgl').onclick=()=>{location.href='/api/auth/google/start?link=1'}}
+  if(!u.hasPw){$('#sc').hidden=true;$('#spl').textContent=T('Set a password (optional)','পাসওয়ার্ড সেট করুন (ঐচ্ছিক)')}
+  $('#spf').textContent=T('Theme','থিম')+': '+PREF.theme+'  |  '+T('Language','ভাষা')+': '+PREF.lang;$('#sgp').onclick=()=>go('personal');
+  $('#sb2').onclick=async()=>{if($('#sn').value.length<8)return say('#sr',T('New password needs at least 8 characters','নতুন পাসওয়ার্ড কমপক্ষে ৮ অক্ষর'));
+   const b=$('#sb2');b.disabled=true;b.classList.add('ld');try{await ax('profile',{current:$('#sc').value,password:$('#sn').value});$('#sc').value=$('#sn').value='';say('#sr',T('Password updated','পাসওয়ার্ড বদলেছে'),1)}catch(x){say('#sr',x.message)}finally{b.disabled=false;b.classList.remove('ld')}};
+  $('#lo').onclick=signOut;$('#dl').onclick=delDlg}
+ if(k==='personal'){v.append(el(`<h2 class="dh2">Personalization · পছন্দ</h2>
+ <span class="fl">Theme · থিম</span><div class="seg" id="sth"><button type="button" data-v="dark">Dark</button><button type="button" data-v="light">Light</button><button type="button" data-v="system">System</button></div>
+ <span class="fl">Language · ভাষা</span><div class="seg" id="slg"><button type="button" data-v="both">English + বাংলা</button><button type="button" data-v="en">English</button><button type="button" data-v="bn">বাংলা</button></div>
+ <div id="sp" class="aer" role="alert"></div>`));
+  const mark=()=>{$('#sth').querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.v===PREF.theme));$('#slg').querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.v===PREF.lang))};mark();
+  $('#sth').onclick=async e=>{const b=e.target.closest('[data-v]');if(b){await setPref({theme:b.dataset.v},'#sp');mark()}};
+  $('#slg').onclick=async e=>{const b=e.target.closest('[data-v]');if(b){await setPref({lang:b.dataset.v},'#sp');mark()}}}
+ if(k==='help')v.append(el(`<h2 class="dh2">Help &amp; About · সাহায্য</h2><p>Chat with Nexan Ai in Bangla or English, create images, search the web, read files and talk by voice. Your chats are saved on this device only.<br>বাংলা বা English-এ চ্যাট, ছবি বানানো, ওয়েব সার্চ, ফাইল পড়া ও ভয়েস। চ্যাট শুধু এই ডিভাইসে সেভ থাকে।</p><p style="margin-top:12px">Nexan Ai v9 · By Ruhul</p>`));
+ applyLang();v.onclick=e=>{const a=e.target.closest('[data-a],[data-t],[data-c]');if(!a)return;if(a.dataset.c){close();load(a.dataset.c);return}if(a.dataset.t){close();const s=document.querySelector('#sug [data-k='+a.dataset.t+']');if(s)s.click();return}
+  if(a.dataset.a==='tools')return go('tools');close();if(a.dataset.a==='hist')$('#side').classList.add('open')}}
+window.openDash=k=>{if(!AU.user){showAu('login');return}$('#dash').hidden=false;go(k||'home')};
+function shrink2(f){return new Promise((ok,no)=>{const i=new Image(),u=URL.createObjectURL(f);i.onload=()=>{const c=document.createElement('canvas');c.width=c.height=128;const s=Math.min(i.width,i.height);
+ c.getContext('2d').drawImage(i,(i.width-s)/2,(i.height-s)/2,s,s,0,0,128,128);URL.revokeObjectURL(u);ok(c.toDataURL('image/jpeg',.8))};i.onerror=()=>no(new Error(T('Not a valid image','সঠিক ছবি নয়')));i.src=u})}
+async function setPref(part,note){PREF={...PREF,...part};try{localStorage.setItem('nx_pref',JSON.stringify(PREF))}catch(e){}applyTheme();applyLang();pmT();
+ if(!AU.user)return;try{const d=await ax('profile',{prefs:{theme:PREF.theme,lang:PREF.lang}});AU.user=d.user;if(note)say(note,T('Saved','সেভ হয়েছে'),1)}catch(x){if(note)say(note,T('Applied on this device, but not saved to your account','এই ডিভাইসে চালু হয়েছে, কিন্তু অ্যাকাউন্টে সেভ হয়নি')+': '+x.message)}}
+async function signOut(){try{await ax('logout',{})}catch(x){}AU.user=null;guestView();acc();$('#dash').hidden=true;$('#au').hidden=true;toast(T('Signed out','সাইন আউট হয়েছে'))}
+function delDlg(){const m=el(`<div class="mdl" role="dialog" aria-modal="true" aria-labelledby="dt"><div class="mbox"><h3 id="dt">Delete account? · অ্যাকাউন্ট মুছবেন?</h3><p>This permanently deletes your Nexan Ai account. This cannot be undone. Chats saved on this device are not affected. · এটি স্থায়ীভাবে মুছে যাবে, ফেরানো যাবে না।</p><input id="dpw" type="password" placeholder="Enter password to confirm · পাসওয়ার্ড দিন" autocomplete="current-password" maxlength="100"><div id="der" class="aer" role="alert"></div><button type="button" class="abtn red" id="ddo">Delete permanently · মুছে ফেলুন</button><button type="button" class="abtn ghost" id="dcn">Cancel · বাতিল</button></div></div>`).firstChild;document.body.append(m);if(AU.user&&!AU.user.hasPw){const d=$('#dpw');d.type='text';d.placeholder=T('Type your email to confirm','নিশ্চিত করতে ইমেইল লিখুন');d.autocomplete='off'}applyLang();$('#dpw').focus();
+ const off=()=>m.remove();$('#dcn').onclick=off;m.onclick=e=>{if(e.target===m)off()};
+ $('#ddo').onclick=async()=>{const pw=$('#dpw').value;if(!pw)return say('#der',T('Enter your password','পাসওয়ার্ড দিন'));const b=$('#ddo');b.disabled=true;b.classList.add('ld');
+  try{await ax('delete',{password:pw,confirm:pw});off();AU.user=null;guestView();acc();$('#dash').hidden=true;$('#au').hidden=true;toast(T('Account deleted','অ্যাকাউন্ট মুছে গেছে'))}catch(x){say('#der',T('Not deleted','মোছা হয়নি')+': '+x.message)}finally{b.disabled=false;b.classList.remove('ld')}}}
+const pm=$('#pmenu'),acb=$('#acc');
+function pmT(){const e=$('#pmt');if(e)e.textContent=({dark:T('Dark','ডার্ক'),light:T('Light','লাইট'),system:T('System','সিস্টেম')})[PREF.theme]}
+function pmClose(){pm.hidden=true;acb.setAttribute('aria-expanded','false')}
+acb.onclick=e=>{e.stopPropagation();pm.hidden=!pm.hidden;acb.setAttribute('aria-expanded',String(!pm.hidden));if(!pm.hidden){pmT();applyLang()}};
+document.addEventListener('click',e=>{if(!pm.hidden&&!pm.contains(e.target))pmClose()});
+pm.onclick=async e=>{const b=e.target.closest('[data-m]');if(!b)return;const m=b.dataset.m;
+ if(m==='theme'){setPref({theme:({dark:'light',light:'system',system:'dark'})[PREF.theme]});return}
+ pmClose();$('#side').classList.remove('open');if(m==='out')return signOut();openDash(m)};
+applyLang();
+addEventListener('keydown',e=>{if(e.key==='Escape'){if(!$('#au').hidden)closeAu();else if(!pm.hidden)pmClose();else if(!$('#dash').hidden)close()}});
+window.boot=async()=>{
+ guestView();acc();
+ try{const d=await Promise.race([ax('me'),new Promise((_,no)=>setTimeout(()=>no(new Error(T('Cannot reach the server. Check your connection.','সার্ভারে সংযোগ হচ্ছে না। নেটওয়ার্ক দেখুন।'))),8000))]);
+  AU.on=!!d.enabled;AU.g=!!d.google;AU.ready=true;
+  if(!d.enabled){await init();acc();return}   // accounts not configured: the site stays open as before
+  if(d.user)await enter(d.user);else acc();
+  authReturn()}
+ catch(e){AU.on=true;AU.ready=true;acc();toast(e.message)}};
+})();
+
+boot();
+</script>
+</body>
+</html>
